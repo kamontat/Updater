@@ -1,6 +1,6 @@
 package main.java.com.kamontat.code.config;
 
-import main.java.com.kamontat.code.popup.DescriptionPopup;
+import main.java.com.kamontat.code.popup.ReleasePopup;
 import main.java.com.kamontat.code.server.Updater;
 import main.java.com.kamontat.code.server.github.Release;
 import main.java.com.kamontat.code.utilities.MessageUtil;
@@ -27,33 +27,33 @@ public class Configuration {
 	public static String UP_TO_DATE_MESSAGE = String.format("current version (%s) is up to date, \nremote version(%s)", Updater.currentVersion, Updater.remoteVersion);
 	
 	/**
-	 * The button title inside {@link DescriptionPopup} class
+	 * The button title inside {@link ReleasePopup} class
 	 *
-	 * @see DescriptionPopup#setPanel()
+	 * @see ReleasePopup#setPanel()
 	 */
-	public static String DOWNLOAD_BUTTON = "Download!";
+	public static String DOWNLOAD_BUTTON = "Update!";
 	/**
 	 * The type of data inside Popup, The body message to describe the version
 	 *
-	 * @see DescriptionPopup#setPanel()
+	 * @see ReleasePopup#setPanel()
 	 */
 	public static String INPUT_TYPE = "text/html";
 	/**
 	 * set be false, if don't want to ask user to open new program when the new program are already downloaded.
 	 *
-	 * @see DescriptionPopup#downloadAction()
+	 * @see ReleasePopup#downloadAction()
 	 */
 	public static boolean HAS_ALERT = true;
 	/**
 	 * The Alert title (usually use when you need your user to tell you that he/she want to open new program or not)
 	 *
-	 * @see DescriptionPopup#downloadAction()
+	 * @see ReleasePopup#downloadAction()
 	 */
 	public static String ALERT_COMPLETE_TITLE = "Download complete!";
 	/**
 	 * The Alert message (usually use when you need your user to tell you that he/she want to open new program or not)
 	 *
-	 * @see DescriptionPopup#downloadAction()
+	 * @see ReleasePopup#downloadAction()
 	 */
 	public static String ALERT_COMPLETE_MESSAGE = "Do you want to open it?";
 	

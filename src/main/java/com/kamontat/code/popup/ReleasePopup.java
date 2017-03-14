@@ -13,15 +13,43 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
+ * The popup that contains update description and downloader link.
+ * <p>
+ * Need to implement method: <br>
+ * <ol>
+ * <li>{@link #downloadAction()} - when user click download/update button</li>
+ * </ol>
+ * Might to implement method: <br>
+ * <ol>
+ * <li>{@link #click(InputEvent, Element, URL, String)}</li>
+ * <li>{@link #placeholder(InputEvent, Element, URL, String)}</li>
+ * <li>{@link #exitPlaceholder(InputEvent, Element, URL, String)}</li>
+ * <li>{@link #otherEvent(InputEvent, Element, URL, String)}</li>
+ * </ol>
+ * Helper Method: <br>
+ * <ol>
+ * <li>{@link #waiting()}</li>
+ * <li>{@link #done()}</li>
+ * <li>{@link #setTooltip(InputEvent, String)}</li>
+ * <li>{@link #removeTooltip(InputEvent)}</li>
+ * <li>{@link #open(URL)}</li>
+ * </ol>
+ *
  * @author kamontat
  * @version 1.0
  * @since Tue 14/Mar/2017 - 2:27 PM
  */
-public abstract class DescriptionPopup implements Runnable {
+public abstract class ReleasePopup implements Runnable {
 	private static JDialog dialog;
 	protected Updater update;
 	
-	public DescriptionPopup(Updater update) throws IOException {
+	/**
+	 * Constructor to create popup <br>
+	 *
+	 * @param update
+	 * 		The updater
+	 */
+	public ReleasePopup(Updater update) {
 		this.update = update;
 	}
 	

@@ -1,6 +1,7 @@
 package main.java.com.kamontat.code.server;
 
 import com.utilities.FilesUtil;
+import main.java.com.kamontat.code.popup.ReleasePopup;
 
 import java.io.File;
 import java.io.IOException;
@@ -99,7 +100,7 @@ public abstract class Updater {
 	public abstract void setDownloadLink();
 	
 	/**
-	 * if you use {@link main.java.com.kamontat.code.popup.DescriptionPopup} class, you no need to implement this method
+	 * if you use {@link ReleasePopup} class, you no need to implement this method
 	 */
 	public void alert() {
 		

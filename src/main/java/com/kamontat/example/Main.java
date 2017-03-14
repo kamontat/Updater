@@ -3,7 +3,7 @@ package main.java.com.kamontat.example;
 import com.utilities.URLUtil;
 import main.java.com.kamontat.code.server.Owner;
 import main.java.com.kamontat.code.config.Configuration;
-import main.java.com.kamontat.code.popup.DescriptionPopup;
+import main.java.com.kamontat.code.popup.ReleasePopup;
 import main.java.com.kamontat.code.server.GitUpdater;
 import main.java.com.kamontat.code.server.Updater;
 import main.java.com.kamontat.code.server.github.Assets;
@@ -19,7 +19,7 @@ import java.io.IOException;
  */
 public class Main {
 	private static Owner owner = new Owner("kamontat", "CheckIDNumber");
-	private static String currentVersion = "v3.0";
+	private static String currentVersion = "v1.0";
 	
 	private static Updater getUpdater() {
 		// set current remoteVersion
@@ -41,7 +41,7 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		Updater update = getUpdater();
 		// create popup
-		DescriptionPopup popup = new DescriptionPopup(update) {
+		ReleasePopup popup = new ReleasePopup(update) {
 			@Override
 			protected void downloadAction() {
 				waiting();
