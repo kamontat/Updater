@@ -1,5 +1,6 @@
 package main.java.com.kamontat.code.popup;
 
+import main.java.com.kamontat.code.config.Configuration;
 import main.java.com.kamontat.code.server.Updater;
 import main.java.com.kamontat.code.utilities.DesktopAction;
 
@@ -17,7 +18,7 @@ import java.net.URL;
  * @since Tue 14/Mar/2017 - 2:27 PM
  */
 public abstract class DescriptionPopup implements Runnable {
-	protected static JDialog dialog;
+	private static JDialog dialog;
 	protected Updater update;
 	
 	public DescriptionPopup(Updater update) throws IOException {
@@ -26,7 +27,7 @@ public abstract class DescriptionPopup implements Runnable {
 	
 	private JPanel setPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		JEditorPane label = new JEditorPane("text/html", update.getDescription());
+		JEditorPane label = new JEditorPane(Configuration.INPUT_TYPE, update.getDescription());
 		label.setEditable(false);
 		label.setOpaque(false);
 		label.addHyperlinkListener(e -> {
@@ -44,7 +45,7 @@ public abstract class DescriptionPopup implements Runnable {
 			}
 		});
 		panel.add(label, BorderLayout.CENTER);
-		JButton button = new JButton("Download!");
+		JButton button = new JButton(Configuration.DOWNLOAD_BUTTON);
 		button.addActionListener(e -> {
 			downloadAction();
 		});
@@ -68,6 +69,10 @@ public abstract class DescriptionPopup implements Runnable {
 	 * Need to implement
 	 */
 	protected void downloadAction() {
+		// alert
+		if (Configuration.HAS_ALERT) {
+			int result = JOptionPane.showConfirmDialog(dialog, Configuration.ALERT_COMPLETE_MESSAGE, Configuration.ALERT_COMPLETE_TITLE, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		}
 	}
 	
 	/**
@@ -131,6 +136,14 @@ public abstract class DescriptionPopup implements Runnable {
 	 * 		description or link
 	 */
 	protected void otherEvent(InputEvent inputEvent, Element sourceElement, URL url, String description) {
+	}
+	
+	protected void waiting() {
+		dialog.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+	}
+	
+	protected void done() {
+		dialog.setCursor(Cursor.getDefaultCursor());
 	}
 	
 	@Override

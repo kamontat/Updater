@@ -1,17 +1,15 @@
 package main.java.com.kamontat.example;
 
 import com.utilities.URLUtil;
-import main.java.com.kamontat.code.Owner;
+import main.java.com.kamontat.code.server.Owner;
+import main.java.com.kamontat.code.config.Configuration;
 import main.java.com.kamontat.code.popup.DescriptionPopup;
 import main.java.com.kamontat.code.server.GitUpdater;
 import main.java.com.kamontat.code.server.Updater;
 import main.java.com.kamontat.code.server.github.Assets;
-import main.java.com.kamontat.code.utilities.DesktopAction;
 import main.java.com.kamontat.code.utilities.MessageUtil;
 
 import javax.swing.*;
-import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -21,9 +19,9 @@ import java.io.IOException;
  */
 public class Main {
 	private static Owner owner = new Owner("kamontat", "CheckIDNumber");
-	public static String currentVersion = "v3.0";
+	private static String currentVersion = "v3.0";
 	
-	public static Updater getUpdater() {
+	private static Updater getUpdater() {
 		// set current remoteVersion
 		Updater.currentVersion = currentVersion;
 		// config class behavior
@@ -42,18 +40,15 @@ public class Main {
 	
 	public static void main(String[] args) throws IOException {
 		Updater update = getUpdater();
+		// create popup
 		DescriptionPopup popup = new DescriptionPopup(update) {
 			@Override
 			protected void downloadAction() {
-				dialog.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+				waiting();
 				String path = update.download();
-				dialog.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-				String message = String.format("The path is %s, \nDo you want to open it?", path);
-				int result = JOptionPane.showConfirmDialog(dialog, message, "Download complete!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-				
-				if (result == JOptionPane.YES_OPTION) {
-					DesktopAction.get().open(new File(path));
-				}
+				done();
+				Configuration.ALERT_COMPLETE_MESSAGE = String.format("The path is %s, \nDo you want to open it?", path);
+				super.downloadAction();
 			}
 		};
 		

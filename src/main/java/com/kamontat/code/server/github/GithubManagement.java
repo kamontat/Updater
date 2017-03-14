@@ -2,7 +2,7 @@ package main.java.com.kamontat.code.server.github;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import main.java.com.kamontat.code.Owner;
+import main.java.com.kamontat.code.server.Owner;
 import main.java.com.kamontat.exception.UpdateException;
 
 import java.io.FileNotFoundException;
@@ -31,11 +31,11 @@ public class GithubManagement {
 	private static final ObjectMapper mapper = new ObjectMapper();
 	
 	private URL url;
-	private int remaining;
+	public int remaining;
 	private Release release;
 	
 	/**
-	 * constructor of update, <br>
+	 * constructor of update, (might be slow)<br>
 	 * <ol>
 	 * <li>check remaining limit</li>
 	 * <li>convert url respond body to json and add to release</li>

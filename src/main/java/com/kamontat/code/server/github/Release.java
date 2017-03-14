@@ -2,6 +2,7 @@ package main.java.com.kamontat.code.server.github;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.kamontat.Converter;
+import main.java.com.kamontat.code.config.Configuration;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -115,7 +116,7 @@ public class Release {
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> T type(ReleaseTitle title, Class<T> className) {
-		if (isEmpty()) return className.cast("Latest Release: not found");
+		if (isEmpty()) return className.cast(Configuration.NOT_FOUND_RELEASE_MESSAGE);
 		
 		String output = node.get(title.name().toLowerCase(Locale.ENGLISH)).asText();
 		
