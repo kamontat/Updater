@@ -1,7 +1,6 @@
 package main.java.com.kamontat.code.server;
 
 import com.utilities.FilesUtil;
-import main.java.com.kamontat.code.Owner;
 
 import java.io.File;
 import java.io.IOException;

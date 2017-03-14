@@ -1,6 +1,5 @@
 package main.java.com.kamontat.code.server;
 
-import main.java.com.kamontat.code.Owner;
 import main.java.com.kamontat.code.server.github.GithubManagement;
 import main.java.com.kamontat.code.server.github.Release;
 import main.java.com.kamontat.exception.UpdateException;
