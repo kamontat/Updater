@@ -1,4 +1,4 @@
-package main.java.com.kamontat.code.server;
+package com.kamontat.code.model;
 
 /**
  * @author kamontat

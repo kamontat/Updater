@@ -1,6 +1,6 @@
-package main.java.com.kamontat.code.utilities;
+package com.kamontat.code.utilities;
 
-import main.java.com.kamontat.code.config.Configuration;
+import com.kamontat.code.config.Configuration;
 
 import javax.swing.*;
 

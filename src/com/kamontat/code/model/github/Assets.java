@@ -1,16 +1,13 @@
-package main.java.com.kamontat.code.server.github;
+package com.kamontat.code.model.github;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.util.RawValue;
-import main.java.com.kamontat.code.server.GitUpdater;
 
 import java.text.DecimalFormat;
 import java.util.*;
 
 /**
  * asset that content in {@link Release} <br>
- * and same with {@link Release}, you can getting data inside json by method {@link #get(GitUpdater.AssetTitle)}.
+ * and same with {@link Release}, you can getting data inside json by method {@link #get(AssetTitle)}.
  */
 public class Assets {
 	/**

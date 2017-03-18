@@ -1,15 +1,15 @@
-package main.java.com.kamontat.code.popup;
+package com.kamontat.code.gui;
 
-import main.java.com.kamontat.code.config.Configuration;
-import main.java.com.kamontat.code.server.Updater;
-import main.java.com.kamontat.code.utilities.DesktopAction;
+import com.kamontat.code.config.Configuration;
+import com.kamontat.code.model.Updater;
+import com.kamontat.code.utilities.DesktopAction;
 
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.text.Element;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
-import java.io.IOException;
 import java.net.URL;
 
 /**
@@ -17,7 +17,7 @@ import java.net.URL;
  * <p>
  * Need to implement method: <br>
  * <ol>
- * <li>{@link #downloadAction()} - when user click download/update button</li>
+ * <li> {@link #actionPerformed(ActionEvent)} - when user click download/update button</li>
  * </ol>
  * Might to implement method: <br>
  * <ol>
@@ -39,7 +39,7 @@ import java.net.URL;
  * @version 1.0
  * @since Tue 14/Mar/2017 - 2:27 PM
  */
-public abstract class ReleasePopup implements Runnable {
+public abstract class ReleasePopup extends AbstractAction implements Runnable {
 	private static JDialog dialog;
 	protected Updater update;
 	
@@ -55,6 +55,9 @@ public abstract class ReleasePopup implements Runnable {
 	
 	private JPanel setPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
+		// north
+		panel.add(new JLabel(String.format("version: %s -> %s", Updater.getCurrentVersion(), Updater.getRemoteVersion()), SwingConstants.CENTER), BorderLayout.NORTH);
+		// center
 		JEditorPane label = new JEditorPane(Configuration.INPUT_TYPE, update.getDescription());
 		label.setEditable(false);
 		label.setOpaque(false);
@@ -73,12 +76,25 @@ public abstract class ReleasePopup implements Runnable {
 			}
 		});
 		panel.add(label, BorderLayout.CENTER);
+		// south
 		JButton button = new JButton(Configuration.DOWNLOAD_BUTTON);
-		button.addActionListener(e -> {
-			downloadAction();
-		});
+		button.addActionListener(this);
 		panel.add(button, BorderLayout.SOUTH);
 		return panel;
+	}
+	
+	/**
+	 * the download button been click
+	 *
+	 * @param e
+	 * 		action event
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// alert
+		if (Configuration.HAS_ALERT) {
+			int result = JOptionPane.showConfirmDialog(null, Configuration.ALERT_COMPLETE_MESSAGE, Configuration.ALERT_COMPLETE_TITLE, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		}
 	}
 	
 	protected void setTooltip(InputEvent event, String text) {
@@ -91,16 +107,6 @@ public abstract class ReleasePopup implements Runnable {
 	
 	protected void open(URL url) {
 		DesktopAction.get().browse(url);
-	}
-	
-	/**
-	 * Need to implement
-	 */
-	protected void downloadAction() {
-		// alert
-		if (Configuration.HAS_ALERT) {
-			int result = JOptionPane.showConfirmDialog(dialog, Configuration.ALERT_COMPLETE_MESSAGE, Configuration.ALERT_COMPLETE_TITLE, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-		}
 	}
 	
 	/**
@@ -176,14 +182,10 @@ public abstract class ReleasePopup implements Runnable {
 	
 	@Override
 	public void run() {
-		try {
-			dialog = new JDialog((Frame) null, update.getTitle() + ": " + update.getVersion());
-			dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-			dialog.setContentPane(setPanel());
-			dialog.pack();
-			dialog.setVisible(true);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		dialog = new JDialog((Frame) null, "Update Page");
+		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		dialog.setContentPane(setPanel());
+		dialog.pack();
+		dialog.setVisible(true);
 	}
 }

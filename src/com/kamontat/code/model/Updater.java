@@ -1,7 +1,7 @@
-package main.java.com.kamontat.code.server;
+package com.kamontat.code.model;
 
+import com.kamontat.code.gui.ReleasePopup;
 import com.utilities.FilesUtil;
-import main.java.com.kamontat.code.popup.ReleasePopup;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,8 +19,8 @@ public abstract class Updater {
 	/**
 	 * must set this first
 	 */
-	public static String currentVersion = "v0.0.0";
-	public static String remoteVersion;
+	private static String currentVersion = "v0.0.0";
+	private static String remoteVersion = "v0.0.0";
 	
 	private URL downloadLink;
 	private String fileName;
@@ -67,12 +67,15 @@ public abstract class Updater {
 		return fileName;
 	}
 	
-	public String getCurrentVersion() {
+	public static void setCurrentVersion(String currentVersion) {
+		Updater.currentVersion = currentVersion;
+	}
+	
+	public static String getCurrentVersion() {
 		return currentVersion;
 	}
 	
-	public String getVersion() throws IOException {
-		if (remoteVersion == null) throw new IOException("remoteVersion unset.");
+	public static String getRemoteVersion() {
 		return remoteVersion;
 	}
 	

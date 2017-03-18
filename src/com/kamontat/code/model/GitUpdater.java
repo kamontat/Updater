@@ -1,8 +1,8 @@
-package main.java.com.kamontat.code.server;
+package com.kamontat.code.model;
 
-import main.java.com.kamontat.code.server.github.GithubManagement;
-import main.java.com.kamontat.code.server.github.Release;
-import main.java.com.kamontat.exception.UpdateException;
+import com.kamontat.code.model.github.GithubManagement;
+import com.kamontat.code.model.github.Release;
+import com.kamontat.exception.UpdateException;
 
 /**
  * Precondition: <br>

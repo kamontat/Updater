@@ -1,4 +1,4 @@
-package main.java.com.kamontat.exception;
+package com.kamontat.exception;
 
 import java.io.IOException;
 import java.net.URL;

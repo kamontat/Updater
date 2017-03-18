@@ -1,4 +1,4 @@
-package main.java.com.kamontat.code.utilities;
+package com.kamontat.code.utilities;
 
 import java.awt.*;
 import java.io.File;

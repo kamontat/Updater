@@ -1,8 +1,8 @@
-package main.java.com.kamontat.code.server.github;
+package com.kamontat.code.model.github;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.kamontat.Converter;
-import main.java.com.kamontat.code.config.Configuration;
+import com.kamontat.code.config.Configuration;
 
 import java.io.BufferedReader;
 import java.io.IOException;

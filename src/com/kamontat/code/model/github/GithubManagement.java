@@ -1,9 +1,9 @@
-package main.java.com.kamontat.code.server.github;
+package com.kamontat.code.model.github;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import main.java.com.kamontat.code.server.Owner;
-import main.java.com.kamontat.exception.UpdateException;
+import com.kamontat.code.model.Owner;
+import com.kamontat.exception.UpdateException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

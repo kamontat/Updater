@@ -1,15 +1,16 @@
-package main.java.com.kamontat.example;
+package com.kamontat.example;
 
+import com.kamontat.code.config.Configuration;
+import com.kamontat.code.gui.ReleasePopup;
+import com.kamontat.code.model.GitUpdater;
+import com.kamontat.code.model.Owner;
+import com.kamontat.code.model.Updater;
+import com.kamontat.code.model.github.Assets;
+import com.kamontat.code.utilities.MessageUtil;
 import com.utilities.URLUtil;
-import main.java.com.kamontat.code.server.Owner;
-import main.java.com.kamontat.code.config.Configuration;
-import main.java.com.kamontat.code.popup.ReleasePopup;
-import main.java.com.kamontat.code.server.GitUpdater;
-import main.java.com.kamontat.code.server.Updater;
-import main.java.com.kamontat.code.server.github.Assets;
-import main.java.com.kamontat.code.utilities.MessageUtil;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 /**
@@ -23,7 +24,8 @@ public class Main {
 	
 	private static Updater getUpdater() {
 		// set current remoteVersion
-		Updater.currentVersion = currentVersion;
+		Updater.setCurrentVersion(currentVersion);
+		
 		// config class behavior
 		return new GitUpdater(owner) {
 			@Override
@@ -40,19 +42,17 @@ public class Main {
 	
 	public static void main(String[] args) throws IOException {
 		Updater update = getUpdater();
-		// create popup
 		ReleasePopup popup = new ReleasePopup(update) {
 			@Override
-			protected void downloadAction() {
+			public void actionPerformed(ActionEvent e) {
 				waiting();
 				String path = update.download();
 				done();
 				Configuration.ALERT_COMPLETE_MESSAGE = String.format("The path is %s, \nDo you want to open it?", path);
-				super.downloadAction();
+				super.actionPerformed(e);
 			}
 		};
 		
-		// if not latest
 		if (!update.isLatest()) {
 			SwingUtilities.invokeLater(popup);
 		} else {

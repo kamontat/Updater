@@ -1,9 +1,11 @@
-package main.java.com.kamontat.code.config;
+package com.kamontat.code.config;
 
-import main.java.com.kamontat.code.popup.ReleasePopup;
-import main.java.com.kamontat.code.server.Updater;
-import main.java.com.kamontat.code.server.github.Release;
-import main.java.com.kamontat.code.utilities.MessageUtil;
+import com.kamontat.code.gui.ReleasePopup;
+import com.kamontat.code.model.Updater;
+import com.kamontat.code.model.github.Release;
+import com.kamontat.code.utilities.MessageUtil;
+
+import java.io.Serializable;
 
 /**
  * Before you use anything in this library, You might need to config some variable inside this class first.
@@ -12,7 +14,12 @@ import main.java.com.kamontat.code.utilities.MessageUtil;
  * @version 1.0
  * @since Tue 14/Mar/2017 - 8:03 PM
  */
-public class Configuration {
+public class Configuration implements Serializable {
+	/**
+	 * serial number
+	 */
+	public static final long serialVersionUID = 1L;
+	
 	/**
 	 * The popup title when user already up to date
 	 *
@@ -24,7 +31,7 @@ public class Configuration {
 	 *
 	 * @see MessageUtil#UP_TO_DATE()
 	 */
-	public static String UP_TO_DATE_MESSAGE = String.format("current version (%s) is up to date, \nremote version(%s)", Updater.currentVersion, Updater.remoteVersion);
+	public static String UP_TO_DATE_MESSAGE = String.format("current version (%s) is up to date, \nremote version(%s)", Updater.getCurrentVersion(), Updater.getRemoteVersion());
 	
 	/**
 	 * The button title inside {@link ReleasePopup} class
@@ -60,7 +67,12 @@ public class Configuration {
 	/**
 	 * use to sent the message back when latest release not found
 	 *
-	 * @see main.java.com.kamontat.code.server.github.Release#type(Release.ReleaseTitle, Class)
+	 * @see Release#type(Release.ReleaseTitle, Class)
 	 */
 	public static String NOT_FOUND_RELEASE_MESSAGE = "Latest Release: not found";
+	
+	/**
+	 * auto checking update program when open the program
+	 */
+	public static boolean isAutoUpdate = false;
 }
