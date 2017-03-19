@@ -5,6 +5,7 @@ import com.kamontat.code.model.Updater;
 import com.kamontat.code.model.github.Release;
 import com.kamontat.code.utilities.MessageUtil;
 
+import java.awt.event.ActionEvent;
 import java.io.Serializable;
 
 /**
@@ -48,19 +49,19 @@ public class Configuration implements Serializable {
 	/**
 	 * set be false, if don't want to ask user to open new program when the new program are already downloaded.
 	 *
-	 * @see ReleasePopup#downloadAction()
+	 * @see ReleasePopup#actionPerformed(ActionEvent)
 	 */
 	public static boolean HAS_ALERT = true;
 	/**
 	 * The Alert title (usually use when you need your user to tell you that he/she want to open new program or not)
 	 *
-	 * @see ReleasePopup#downloadAction()
+	 * @see ReleasePopup#actionPerformed(ActionEvent)
 	 */
 	public static String ALERT_COMPLETE_TITLE = "Download complete!";
 	/**
 	 * The Alert message (usually use when you need your user to tell you that he/she want to open new program or not)
 	 *
-	 * @see ReleasePopup#downloadAction()
+	 * @see ReleasePopup#actionPerformed(ActionEvent)
 	 */
 	public static String ALERT_COMPLETE_MESSAGE = "Do you want to open it?";
 	

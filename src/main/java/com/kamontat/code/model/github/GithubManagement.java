@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.kamontat.code.model.Owner;
 import com.kamontat.exception.UpdateException;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -42,9 +43,11 @@ public class GithubManagement {
 	 * <li>return the latest release</li>
 	 * </ol>
 	 *
+	 * @param o
+	 * 		The owner project
 	 * @throws UpdateException
 	 * 		<ul>
-	 * 		<li>json parsing error => can't parse respond body to json</li>
+	 * 		<li>json parsing error - can't parse respond body to json</li>
 	 * 		<li>{@link #getUrl(String)}</li>
 	 * 		<li>{@link #getConnection(URL)} </li>
 	 * 		</ul>
@@ -77,7 +80,7 @@ public class GithubManagement {
 	 * 		link must content http:// or https://
 	 * @return {@link URL} of the link
 	 * @throws UpdateException
-	 * 		url error => no protocol, string can't parse
+	 * 		url error - no protocol, string can't parse
 	 */
 	private static URL getUrl(String link) throws UpdateException {
 		try {

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.kamontat.Converter;
 
 import com.kamontat.code.config.Configuration;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.*;
@@ -49,6 +50,8 @@ public class Release {
 	
 	/**
 	 * use this method if not latest release
+	 *
+	 * @return empty release (you can check isEmpty by {@link #isEmpty()} method)
 	 */
 	public static Release getEmptyRelease() {
 		return new Release(null);
@@ -104,7 +107,8 @@ public class Release {
 	}
 	
 	/**
-	 * get data by title of the json and cast to className by parameter
+	 * get data by title of the json and cast to className by parameter <br>
+	 * If you pass {@link ReleaseTitle#BODY}, it's will automatically convert to html form.
 	 *
 	 * @param title
 	 * 		getting the title of json
@@ -113,6 +117,7 @@ public class Release {
 	 * @param <T>
 	 * 		T class to cast
 	 * @return object in form of class that pass in parameter, or try cast <code>empty string</code>("") to <code>className</code> parameter
+	 * @see Converter
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> T type(ReleaseTitle title, Class<T> className) {
