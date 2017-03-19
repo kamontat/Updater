@@ -14,7 +14,10 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- library -->
         <jackson.version>2.8.7</jackson.version>
+        <maven.model.version>3.3.9</maven.model.version>
         <maven.javadocs.version>2.10.4</maven.javadocs.version>
+        <maven.source.version>3.0.1</maven.source.version>
+        <maven.install.version>2.5</maven.install.version>
     </properties>
 
     <dependencies>
@@ -24,33 +27,103 @@
             <version>${jackson.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-model</artifactId>
+            <version>${maven.model.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.kamontat</groupId>
             <artifactId>converter</artifactId>
             <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/converter-1.0.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.kamontat</groupId>
             <artifactId>Utilities</artifactId>
             <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/Utilities-1.0.0.jar</systemPath>
         </dependency>
     </dependencies>
 
+    <repositories>
+        <!-- converter library -->
+        <repository>
+            <id>converter-1.0.0</id>
+            <url>https://github.com/kamontat/Conversion/raw/v1.0.0/production/converter-1.0.0.jar</url>
+        </repository>
+        <repository>
+            <id>converter-1.0.0-javadoc</id>
+            <url>https://github.com/kamontat/Conversion/raw/v1.0.0/production/converter-1.0.0-javadoc.jar</url>
+        </repository>
+        <!-- Utilities library -->
+        <repository>
+            <id>Utilities-1.0.0</id>
+            <url>https://github.com/kamontat/Utilities/raw/v1.0.0/production/Utilities-1.0.0.jar</url>
+        </repository>
+        <repository>
+            <id>Utilities-1.0.0-javadoc</id>
+            <url>https://github.com/kamontat/Utilities/raw/v1.0.0/production/Utilities-1.0.0-javadoc.jar</url>
+        </repository>
+    </repositories>
+
     <build>
         <plugins>
+            <!-- javadoc execution -->
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-javadoc-plugin</artifactId>-->
+            <!--<version>${maven.javadocs.version}</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<id>attach-javadocs</id>-->
+            <!--<goals>-->
+            <!--<goal>jar</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--<includeDependencySources>true</includeDependencySources>-->
+            <!--<show>private</show>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+            <!-- source execution -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven.javadocs.version}</version>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven.source.version}</version>
                 <executions>
                     <execution>
-                        <id>attach-javadocs</id>
+                        <id>attach-sources</id>
                         <goals>
                             <goal>jar</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- installation -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>${maven.install.version}</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>com.kamontat</groupId>
+                            <artifactId>converter</artifactId>
+                            <version>1.0.0</version>
+                            <packaging>jar</packaging>
+                            <file>${basedir}/lib/converter-1.0.0.jar</file>
+                            <javadoc>${basedir}/lib/converter-1.0.0-javadoc.jar</javadoc>
+
+                            <groupId>com.kamontat</groupId>
+                            <artifactId>Utilities</artifactId>
+                            <version>1.0.0</version>
+                            <packaging>jar</packaging>
+                            <file>${basedir}/lib/Utilities-1.0.0.jar</file>
+                            <javadoc>${basedir}/lib/Utilities-1.0.0-javadoc.jar</javadoc>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
