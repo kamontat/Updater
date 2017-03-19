@@ -25,7 +25,6 @@ public class Main {
 	private static Updater getUpdater() {
 		// set current remoteVersion
 		Updater.setCurrentVersion(currentVersion);
-		
 		// config class behavior
 		return new GitUpdater(owner) {
 			@Override
