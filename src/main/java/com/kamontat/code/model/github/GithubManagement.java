@@ -3,62 +3,61 @@ package com.kamontat.code.model.github;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.kamontat.code.model.Owner;
+import com.kamontat.code.object.Owner;
 import com.kamontat.exception.UpdateException;
+import com.kamontat.rawapi.Github;
+import com.kamontat.utilities.URLsUtil;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
 
 /**
  * @author kamontat
  * @version 1.0
  * @since Mon 13/Mar/2017 - 9:11 PM
  */
-public class GithubManagement {
-	private static final String GITHUB_API = "https://api.github.com/";
-	private static final String REPOS_API = "repos/";
-	
-	private static final String MARKDOWN_CONVERTER_API = "markdown";
-	private static final String RELEASE_API = "releases";
-	private static final String LATEST_RELEASE_API = "releases/latest";
-	
-	// header of remaining rate-limit
-	private static final String RATE_REMAINING_HEADER = "X-RateLimit-Remaining";
-	// json parse using jackson api
+public class GithubManagement implements Github {
 	private static final ObjectMapper mapper = new ObjectMapper();
 	
 	private URL url;
-	public int remaining;
+	private int remaining;
 	private Release release;
 	
 	/**
-	 * constructor of update, (might be slow)<br>
-	 * <ol>
-	 * <li>check remaining limit</li>
-	 * <li>convert url respond body to json and add to release</li>
-	 * <li>return the latest release</li>
-	 * </ol>
+	 * constructor of update, this just update rate limit - you can get by {@link #getRemaining()} <br>
+	 * So you need to call {@link #updateRelease()} manually
 	 *
 	 * @param o
 	 * 		The owner project
 	 * @throws UpdateException
-	 * 		<ul>
-	 * 		<li>json parsing error - can't parse respond body to json</li>
-	 * 		<li>{@link #getUrl(String)}</li>
-	 * 		<li>{@link #getConnection(URL)} </li>
-	 * 		</ul>
+	 * 		some error occurred when try to create URL or open connection
 	 */
 	public GithubManagement(Owner o) throws UpdateException {
 		String link = GITHUB_API + REPOS_API + o.getName() + "/" + o.getProjectName() + "/" + LATEST_RELEASE_API;
-		url = getUrl(link);
-		// get rate-limit
-		remaining = Integer.parseInt(getConnection(url).getHeaderField(RATE_REMAINING_HEADER));
-		
-		// converting json to object
+		url = URLsUtil.getUrl(link).getUrl();
+		if (url == null) throw new UpdateException(link, "error occurred");
+		updateRemain();
+	}
+	
+	@Override
+	public synchronized Github updateRemain() throws UpdateException {
+		try {
+			remaining = Integer.parseInt(URLsUtil.getUrl(url).getHttpConnection().getHeaderField(RATE_REMAINING_HEADER));
+		} catch (Exception e) {
+			throw new UpdateException(url, e);
+		}
+		return this;
+	}
+	
+	@Override
+	public int getRemaining() {
+		return remaining;
+	}
+	
+	@Override
+	public synchronized Github updateRelease() throws UpdateException {
+		if (isOutOfRate()) throw new UpdateException(url, "out of rate. please wait for a while");
 		try {
 			JsonNode node = mapper.readTree(url);
 			release = new Release(node);
@@ -67,43 +66,11 @@ public class GithubManagement {
 		} catch (IOException e) {
 			throw new UpdateException(url, e.getMessage());
 		}
+		return this;
 	}
 	
+	@Override
 	public Release getRelease() {
 		return release;
-	}
-	
-	/**
-	 * get url
-	 *
-	 * @param link
-	 * 		link must content http:// or https://
-	 * @return {@link URL} of the link
-	 * @throws UpdateException
-	 * 		url error - no protocol, string can't parse
-	 */
-	private static URL getUrl(String link) throws UpdateException {
-		try {
-			return new URL(link.toLowerCase(Locale.ENGLISH));
-		} catch (MalformedURLException e) {
-			throw new UpdateException(link, e);
-		}
-	}
-	
-	/**
-	 * get connection of url
-	 *
-	 * @param url
-	 * 		the url to connect
-	 * @return https url connection
-	 * @throws UpdateException
-	 * 		if I/O occurred
-	 */
-	private static HttpURLConnection getConnection(URL url) throws UpdateException {
-		try {
-			return (HttpURLConnection) url.openConnection();
-		} catch (IOException e) {
-			throw new UpdateException(url, e);
-		}
 	}
 }

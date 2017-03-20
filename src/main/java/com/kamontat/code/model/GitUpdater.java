@@ -2,6 +2,7 @@ package com.kamontat.code.model;
 
 import com.kamontat.code.model.github.GithubManagement;
 import com.kamontat.code.model.github.Release;
+import com.kamontat.code.object.Owner;
 import com.kamontat.exception.UpdateException;
 
 /**

@@ -2,7 +2,6 @@ package com.kamontat.code.model.github;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.kamontat.Converter;
-
 import com.kamontat.code.config.Configuration;
 
 import java.io.BufferedReader;

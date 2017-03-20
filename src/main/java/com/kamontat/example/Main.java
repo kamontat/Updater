@@ -3,7 +3,7 @@ package com.kamontat.example;
 import com.kamontat.code.config.Configuration;
 import com.kamontat.code.gui.ReleasePopup;
 import com.kamontat.code.model.GitUpdater;
-import com.kamontat.code.model.Owner;
+import com.kamontat.code.object.Owner;
 import com.kamontat.code.model.Updater;
 import com.kamontat.code.model.github.Assets;
 import com.kamontat.code.utilities.MessageUtil;

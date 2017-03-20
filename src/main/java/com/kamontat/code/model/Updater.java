@@ -1,6 +1,7 @@
 package com.kamontat.code.model;
 
 import com.kamontat.code.gui.ReleasePopup;
+import com.kamontat.code.object.Owner;
 import com.utilities.FilesUtil;
 
 import java.io.File;
@@ -18,7 +19,6 @@ import java.nio.file.StandardCopyOption;
  */
 public abstract class Updater implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private static final String DEFAULT_VERSION = "v0.0.0";
 	// project owner
 	private Owner owner;
 	// information of newest version

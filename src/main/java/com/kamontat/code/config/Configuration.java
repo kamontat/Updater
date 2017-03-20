@@ -56,7 +56,7 @@ public class Configuration implements Serializable {
 	 *
 	 * @see ReleasePopup#actionPerformed(ActionEvent)
 	 */
-	public static String ALERT_COMPLETE_TITLE = "Download complete!";
+	public static String ALERT_COMPLETE_TITLE = "Downloadable complete!";
 	/**
 	 * The Alert message (usually use when you need your user to tell you that he/she want to open new program or not)
 	 *
