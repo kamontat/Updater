@@ -56,7 +56,7 @@ public abstract class ReleasePopup extends AbstractAction implements Runnable {
 	private JPanel setPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
 		// north
-		panel.add(new JLabel(String.format("version: %s -> %s", Updater.getCurrentVersion(), Updater.getRemoteVersion()), SwingConstants.CENTER), BorderLayout.NORTH);
+		// panel.add(new JLabel(String.format("version: %s -> %s", Updater.getCurrentVersion(), Updater.getRemoteVersion()), SwingConstants.CENTER), BorderLayout.NORTH);
 		// center
 		JEditorPane label = new JEditorPane(Configuration.INPUT_TYPE, update.getDescription());
 		label.setEditable(false);

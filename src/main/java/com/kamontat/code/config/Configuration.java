@@ -1,7 +1,6 @@
 package com.kamontat.code.config;
 
 import com.kamontat.code.gui.ReleasePopup;
-import com.kamontat.code.model.Updater;
 import com.kamontat.code.model.github.Release;
 import com.kamontat.code.utilities.MessageUtil;
 
@@ -32,7 +31,7 @@ public class Configuration implements Serializable {
 	 *
 	 * @see MessageUtil#UP_TO_DATE()
 	 */
-	public static String UP_TO_DATE_MESSAGE = String.format("current version (%s) is up to date, \nremote version(%s)", Updater.getCurrentVersion(), Updater.getRemoteVersion());
+	// public static String UP_TO_DATE_MESSAGE = String.format("current version (%s) is up to date, \nremote version(%s)", Updater.getCurrentVersion(), Updater.getRemoteVersion());
 	
 	/**
 	 * The button title inside {@link ReleasePopup} class

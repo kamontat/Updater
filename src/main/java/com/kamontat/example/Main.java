@@ -7,7 +7,7 @@ import com.kamontat.code.model.Owner;
 import com.kamontat.code.model.Updater;
 import com.kamontat.code.model.github.Assets;
 import com.kamontat.code.utilities.MessageUtil;
-import com.utilities.URLUtil;
+import com.kamontat.utilities.URLsUtil;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,17 +24,13 @@ public class Main {
 	
 	private static Updater getUpdater() {
 		// set current remoteVersion
-		Updater.setCurrentVersion(currentVersion);
+		// Updater.setCurrentVersion(currentVersion);
 		// config class behavior
 		return new GitUpdater(owner) {
 			@Override
 			public void setDownloadLink() {
 				String link = release.getAsset(0).get(Assets.AssetTitle.BROWSER_DOWNLOAD_URL);
-				try {
-					setDownloadLink(URLUtil.getUrl(link).getUrl());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				setDownloadLink(URLsUtil.getUrl(link).getUrl());
 			}
 		};
 	}

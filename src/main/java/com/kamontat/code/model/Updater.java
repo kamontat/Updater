@@ -1,10 +1,11 @@
 package com.kamontat.code.model;
 
+import com.kamontat.code.gui.ReleasePopup;
 import com.utilities.FilesUtil;
 
-import com.kamontat.code.gui.ReleasePopup;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,17 +16,18 @@ import java.nio.file.StandardCopyOption;
  * @version 1.0
  * @since Wed 08/Mar/2017 - 10:27 PM
  */
-public abstract class Updater {
-	/**
-	 * must set this first
-	 */
-	private static String currentVersion = "v0.0.0";
-	private static String remoteVersion = "v0.0.0";
-	
-	private URL downloadLink;
-	private String fileName;
+public abstract class Updater implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private static final String DEFAULT_VERSION = "v0.0.0";
+	// project owner
 	private Owner owner;
-	
+	// information of newest version
+	private String currentVersion;
+	private String remoteVersion;
+	private String fileName;
+	private String description;
+	// link of newest version
+	private URL downloadLink;
 	
 	public Updater(Owner owner) {
 		this.owner = owner;
@@ -67,15 +69,15 @@ public abstract class Updater {
 		return fileName;
 	}
 	
-	public static void setCurrentVersion(String currentVersion) {
-		Updater.currentVersion = currentVersion;
+	public void setCurrentVersion(String currentVersion) {
+		currentVersion = currentVersion;
 	}
 	
-	public static String getCurrentVersion() {
+	public String getCurrentVersion() {
 		return currentVersion;
 	}
 	
-	public static String getRemoteVersion() {
+	public String getRemoteVersion() {
 		return remoteVersion;
 	}
 	
