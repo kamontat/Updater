@@ -201,5 +201,3 @@ target/
 .cache-main
 .scala_dependencies
 .worksheet
-
-!lib/*
