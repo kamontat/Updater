@@ -12,15 +12,15 @@ import java.net.URL;
  * @version 1.0
  * @since Tue 14/Mar/2017 - 2:59 PM
  */
-public class DesktopAction {
+public class DesktopUtil {
 	private static Desktop desktop;
 	private boolean isSupport;
 	
-	public static DesktopAction get() {
-		return new DesktopAction();
+	public static DesktopUtil get() {
+		return new DesktopUtil();
 	}
 	
-	private DesktopAction() {
+	private DesktopUtil() {
 		isSupport = Desktop.isDesktopSupported();
 		if (isSupport) desktop = Desktop.getDesktop();
 	}

@@ -2,7 +2,7 @@ package com.kamontat.code.gui;
 
 import com.kamontat.code.config.Configuration;
 import com.kamontat.code.model.Updater;
-import com.kamontat.code.utilities.DesktopAction;
+import com.kamontat.code.utilities.DesktopUtil;
 
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
@@ -106,7 +106,7 @@ public abstract class ReleasePopup extends AbstractAction implements Runnable {
 	}
 	
 	protected void open(URL url) {
-		DesktopAction.get().browse(url);
+		DesktopUtil.get().browse(url);
 	}
 	
 	/**
