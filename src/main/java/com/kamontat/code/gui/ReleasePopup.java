@@ -1,14 +1,15 @@
 package com.kamontat.code.gui;
 
+import com.kamontat.code.config.Configuration;
+import com.kamontat.code.model.Updater;
+import com.kamontat.code.utilities.DesktopAction;
+
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.text.Element;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
-import com.kamontat.code.config.Configuration;
-import com.kamontat.code.model.Updater;
-import com.kamontat.code.utilities.DesktopAction;
 import java.net.URL;
 
 /**
