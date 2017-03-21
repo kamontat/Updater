@@ -140,15 +140,20 @@ public class Release {
 	 * since in github you can add asset more than 1 file, so you need to pass parameter file index that you want to use
 	 *
 	 * @param number
-	 * 		index of asset
+	 * 		asset number start with 1
 	 * @return {@link Assets} - getting asset with the index; <br>
 	 * BUT if no latest release or no asset occurred it's will return empty asset;
 	 */
 	public Assets getAsset(int number) {
+		// change to index
+		number--;
+		
 		if (this.node == null) return Assets.getEmptyAsset();
 		
 		JsonNode assetsNode = this.node.get("assets");
-		if (assetsNode == null) return Assets.getEmptyAsset();
+		
+		if (assetsNode == null || assetsNode.size() < number) return Assets.getEmptyAsset();
+		
 		return new Assets(assetsNode.get(number));
 	}
 }

@@ -74,7 +74,8 @@ public class GithubManagement implements Github {
 	}
 	
 	@Override
-	public Release getRelease() {
-		return release;
+	public Release getRelease() throws UpdateException {
+		if (isUpdated()) return release;
+		throw new UpdateException(url, "Not update yet");
 	}
 }

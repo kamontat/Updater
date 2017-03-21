@@ -27,7 +27,7 @@ public interface Github {
 	
 	Github updateRelease() throws UpdateException;
 	
-	Release getRelease();
+	Release getRelease() throws UpdateException;
 	
 	default boolean isOutOfLimit() {
 		return getRemaining() <= 0;
