@@ -1,12 +1,12 @@
 package com.kamontat.example;
 
-import com.kamontat.code.config.Configuration;
-import com.kamontat.code.gui.ReleasePopup;
-import com.kamontat.code.model.GitUpdater;
-import com.kamontat.code.object.Owner;
-import com.kamontat.code.model.Updater;
-import com.kamontat.code.model.github.Assets;
-import com.kamontat.code.utilities.MessageUtil;
+import com.kamontat.config.Configuration;
+import com.kamontat.gui.ReleasePopup;
+import com.kamontat.model.GitUpdater;
+import com.kamontat.object.Owner;
+import com.kamontat.model.Updater;
+import com.kamontat.object.Assets;
+import com.kamontat.utilities.MessageUtil;
 import com.kamontat.utilities.URLsUtil;
 
 import javax.swing.*;
