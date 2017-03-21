@@ -1,8 +1,8 @@
-package com.kamontat.code.gui;
+package com.kamontat.gui;
 
-import com.kamontat.code.config.Configuration;
-import com.kamontat.code.model.Updater;
-import com.kamontat.code.utilities.DesktopUtil;
+import com.kamontat.config.Configuration;
+import com.kamontat.model.Updater;
+import com.kamontat.utilities.DesktopUtil;
 
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;

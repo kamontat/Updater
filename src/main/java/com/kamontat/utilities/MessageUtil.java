@@ -1,4 +1,4 @@
-package com.kamontat.code.utilities;
+package com.kamontat.utilities;
 
 /**
  * @author kamontat

@@ -1,9 +1,8 @@
-package com.kamontat.code.model.github;
+package com.kamontat.object;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.kamontat.code.object.Owner;
 import com.kamontat.exception.UpdateException;
 import com.kamontat.rawapi.Github;
 import com.kamontat.utilities.URLsUtil;
@@ -21,7 +20,7 @@ public class GithubManagement implements Github {
 	private static final ObjectMapper mapper = new ObjectMapper();
 	
 	private URL url;
-	private int remaining;
+	private int remaining = -99;
 	private Release release;
 	
 	/**
@@ -41,6 +40,11 @@ public class GithubManagement implements Github {
 	}
 	
 	@Override
+	public boolean isUpdated() {
+		return remaining != -99 && url != null && release != null;
+	}
+	
+	@Override
 	public synchronized Github updateRemain() throws UpdateException {
 		try {
 			remaining = Integer.parseInt(URLsUtil.getUrl(url).getHttpConnection().getHeaderField(RATE_REMAINING_HEADER));
@@ -57,7 +61,7 @@ public class GithubManagement implements Github {
 	
 	@Override
 	public synchronized Github updateRelease() throws UpdateException {
-		if (isOutOfRate()) throw new UpdateException(url, "out of rate. please wait for a while");
+		if (isOutOfLimit()) throw new UpdateException(url, "out of rate. please wait for a while");
 		try {
 			JsonNode node = mapper.readTree(url);
 			release = new Release(node);

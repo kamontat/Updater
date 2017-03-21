@@ -1,4 +1,4 @@
-package com.kamontat.code.model.github;
+package com.kamontat.object;
 
 import com.fasterxml.jackson.databind.JsonNode;
 

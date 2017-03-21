@@ -1,7 +1,7 @@
-package com.kamontat.code.model;
+package com.kamontat.model;
 
-import com.kamontat.code.gui.ReleasePopup;
-import com.kamontat.code.object.Owner;
+import com.kamontat.gui.ReleasePopup;
+import com.kamontat.object.Owner;
 import com.utilities.FilesUtil;
 
 import java.io.File;

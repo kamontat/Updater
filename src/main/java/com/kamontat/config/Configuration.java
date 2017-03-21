@@ -1,8 +1,8 @@
-package com.kamontat.code.config;
+package com.kamontat.config;
 
-import com.kamontat.code.gui.ReleasePopup;
-import com.kamontat.code.model.github.Release;
-import com.kamontat.code.utilities.MessageUtil;
+import com.kamontat.gui.ReleasePopup;
+import com.kamontat.object.Release;
+import com.kamontat.utilities.MessageUtil;
 
 import java.awt.event.ActionEvent;
 import java.io.Serializable;

@@ -1,4 +1,4 @@
-package com.kamontat.code.object;
+package com.kamontat.object;
 
 /**
  * @author kamontat
