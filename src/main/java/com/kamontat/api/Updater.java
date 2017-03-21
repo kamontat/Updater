@@ -61,4 +61,9 @@ public abstract class Updater implements Updatable {
 	public Downloadable getDownload() {
 		return download;
 	}
+	
+	@Override
+	public String toString() {
+		return "Updater{" + "version=" + version + ", owner=" + owner + ", title='" + title + '\'' + ", description='" + description + '\'' + ", download=" + download + '}';
+	}
 }

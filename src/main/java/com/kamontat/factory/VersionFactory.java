@@ -42,4 +42,9 @@ public class VersionFactory implements Version {
 	public String getRemoteVersion() {
 		return remote;
 	}
+	
+	@Override
+	public String toString() {
+		return "VersionFactory{" + "current='" + current + '\'' + ", remote='" + remote + '\'' + '}';
+	}
 }

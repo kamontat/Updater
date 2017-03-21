@@ -1,6 +1,5 @@
 package com.kamontat.config;
 
-import com.kamontat.gui.ReleasePopup;
 import com.kamontat.object.Release;
 import com.kamontat.utilities.MessageUtil;
 
