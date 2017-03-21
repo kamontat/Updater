@@ -1,6 +1,6 @@
 package com.kamontat.rawapi;
 
-import com.kamontat.code.model.github.Release;
+import com.kamontat.object.Release;
 import com.kamontat.exception.UpdateException;
 
 /**
@@ -19,6 +19,8 @@ public interface Github {
 	// header of remaining rate-limit
 	String RATE_REMAINING_HEADER = "X-RateLimit-Remaining";
 	
+	boolean isUpdated();
+	
 	Github updateRemain() throws UpdateException;
 	
 	int getRemaining();
@@ -27,7 +29,7 @@ public interface Github {
 	
 	Release getRelease();
 	
-	default boolean isOutOfRate() {
+	default boolean isOutOfLimit() {
 		return getRemaining() <= 0;
 	}
 }

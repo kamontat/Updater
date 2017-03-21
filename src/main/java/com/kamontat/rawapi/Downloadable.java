@@ -1,16 +1,18 @@
 package com.kamontat.rawapi;
 
-import java.net.URL;
+import com.kamontat.exception.UpdateException;
+
+import java.util.concurrent.Callable;
 
 /**
  * @author kamontat
  * @version 1.0
  * @since Mon 20/Mar/2017 - 10:38 PM
  */
-public interface Downloadable {
-	URL getDownloadLink();
+public interface Downloadable extends Callable<Downloadable> {
+	String getResultPath();
 	
-	void download();
+	Downloadable call() throws UpdateException;
 	
 	void alert();
 }
