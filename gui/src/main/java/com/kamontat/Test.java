@@ -1,4 +1,4 @@
-package com.kamontat.gui;
+package com.kamontat;
 
 import javafx.application.Application;
 import javafx.embed.swing.JFXPanel;

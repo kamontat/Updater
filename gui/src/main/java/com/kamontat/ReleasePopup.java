@@ -1,8 +1,8 @@
-//package com.kamontat.gui;
+//package com.kamontat.api.gui;
 //
 //import com.kamontat.config.Configuration;
 //import com.kamontat.model.Updater;
-//import com.kamontat.utilities.DesktopUtil;
+//import DesktopUtil;
 //
 //import javax.swing.*;
 //import javax.swing.event.HyperlinkEvent;

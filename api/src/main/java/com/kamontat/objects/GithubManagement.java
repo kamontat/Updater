@@ -1,4 +1,4 @@
-package com.kamontat.object;
+package com.kamontat.objects;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

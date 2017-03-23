@@ -1,6 +1,6 @@
 package com.kamontat.api;
 
-import com.kamontat.object.Owner;
+import com.kamontat.objects.Owner;
 import com.kamontat.rawapi.Downloadable;
 import com.kamontat.rawapi.Updatable;
 import com.kamontat.rawapi.Version;

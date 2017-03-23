@@ -1,6 +1,6 @@
 package com.kamontat.config;
 
-import com.kamontat.object.Release;
+import com.kamontat.objects.Release;
 import com.kamontat.utilities.MessageUtil;
 
 import java.awt.event.ActionEvent;

@@ -1,9 +1,9 @@
-package com.kamontat.example;
+package com.kamontat.examples;
 
 import com.kamontat.api.Updater;
 import com.kamontat.exception.UpdateException;
 import com.kamontat.implementation.GUpdater;
-import com.kamontat.object.Owner;
+import com.kamontat.objects.Owner;
 
 /**
  * @author kamontat

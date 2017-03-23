@@ -1,4 +1,4 @@
-package com.kamontat.gui.loadmonitor;
+package com.kamontat.loadmonitor;
 
 import javax.swing.*;
 import javax.swing.plaf.ProgressBarUI;

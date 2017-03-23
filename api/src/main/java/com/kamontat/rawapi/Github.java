@@ -1,6 +1,6 @@
 package com.kamontat.rawapi;
 
-import com.kamontat.object.Release;
+import com.kamontat.objects.Release;
 import com.kamontat.exception.UpdateException;
 
 /**
