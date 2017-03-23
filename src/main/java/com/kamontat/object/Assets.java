@@ -23,7 +23,7 @@ public class Assets {
 		DOWNLOAD_COUNT,
 		CREATE_AT,
 		UPDATE_AT,
-		DOWNLOAD_URL;
+		BROWSER_DOWNLOAD_URL;
 	}
 	
 	/**

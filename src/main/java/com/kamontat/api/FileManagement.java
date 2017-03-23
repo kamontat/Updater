@@ -5,6 +5,7 @@ import com.kamontat.utilities.FilesUtil;
 import com.kamontat.utilities.URLsUtil;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -30,8 +31,12 @@ public class FileManagement {
 		return () -> {
 			String fileName = URLsUtil.getUrl(link).getURLFilename();
 			Path dist = Paths.get(distDirectory).resolve(fileName);
-			
-			Files.copy(link.openStream(), dist, StandardCopyOption.REPLACE_EXISTING);
+			if (dist.toFile().exists()) FilesUtil.delFile(dist.toFile().getAbsolutePath());
+			try (InputStream stream = link.openStream()) {
+				Files.copy(stream, dist, StandardCopyOption.REPLACE_EXISTING);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			return dist.toFile().getAbsolutePath();
 		};
 	}

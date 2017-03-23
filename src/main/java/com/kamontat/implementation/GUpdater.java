@@ -56,7 +56,7 @@ public class GUpdater extends Updater {
 		super.version = factory;
 		// link setup
 		if (pos != -1)
-			url = URLsUtil.getUrl(manager.getRelease().getAsset(pos).get(Assets.AssetTitle.DOWNLOAD_URL)).getUrl();
+			url = URLsUtil.getUrl(manager.getRelease().getAsset(pos).get(Assets.AssetTitle.BROWSER_DOWNLOAD_URL)).getUrl();
 		// download setup
 		DownloadFactory.setLocation(url, FilesUtil.getFileFromRoot().getAbsolutePath());
 		super.download = DownloadFactory.getInstance().getDownload();
