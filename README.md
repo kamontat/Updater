@@ -1,5 +1,8 @@
 # jUpdater
 
+# On Maintaination
+- convert all `swing` to `javafx`
+
 # To Contribute
 1. run `mvn clean`
   - it's for clean all exist target folder
