@@ -7,9 +7,10 @@
         <groupId>com.kamontat</groupId>
         <version>0.1.0</version>
     </parent>
-
     <modelVersion>4.0.0</modelVersion>
+
     <artifactId>UpdateAPI</artifactId>
+    <version>1.0.0</version>
 
     <dependencies>
         <dependency>
@@ -33,129 +34,4 @@
             <version>${utilities.version}</version>
         </dependency>
     </dependencies>
-
-    <!-- download my library -->
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.googlecode.maven-download-plugin</groupId>
-                <artifactId>download-maven-plugin</artifactId>
-                <version>${maven.download.version}</version>
-                <executions>
-                    <execution>
-                        <id>utilities</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>wget</goal>
-                        </goals>
-                        <configuration>
-                            <url>
-                                https://github.com/kamontat/Utilities/raw/v${utilities.version}/production/Utilities-${utilities.version}.jar
-                            </url>
-                            <outputDirectory>${basedir}/lib</outputDirectory>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>utilities-javadocs</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>wget</goal>
-                        </goals>
-                        <configuration>
-                            <url>
-                                https://github.com/kamontat/Utilities/raw/v${utilities.version}/production/Utilities-${utilities.version}-javadoc.jar
-                            </url>
-                            <outputDirectory>${basedir}/lib</outputDirectory>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>utilities-sources</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>wget</goal>
-                        </goals>
-                        <configuration>
-                            <url>
-                                https://github.com/kamontat/Utilities/raw/v${utilities.version}/production/Utilities-${utilities.version}-sources.jar
-                            </url>
-                            <outputDirectory>${basedir}/lib</outputDirectory>
-                        </configuration>
-                    </execution>
-
-
-                    <execution>
-                        <id>converter</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>wget</goal>
-                        </goals>
-                        <configuration>
-                            <url>
-                                https://github.com/kamontat/Conversion/raw/v${converter.version}/production/converter-${converter.version}.jar
-                            </url>
-                            <outputDirectory>${basedir}/lib</outputDirectory>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>converter-javadoc</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>wget</goal>
-                        </goals>
-                        <configuration>
-                            <url>
-                                https://github.com/kamontat/Conversion/raw/v${converter.version}/production/converter-${converter.version}-javadoc.jar
-                            </url>
-                            <outputDirectory>${basedir}/lib</outputDirectory>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>converter-sources</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>wget</goal>
-                        </goals>
-                        <configuration>
-                            <url>
-                                https://github.com/kamontat/Conversion/raw/v${converter.version}/production/converter-${converter.version}-sources.jar
-                            </url>
-                            <outputDirectory>${basedir}/lib</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- installation -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-install-plugin</artifactId>
-                <version>${maven.install.version}</version>
-                <executions>
-                    <execution>
-                        <id>converter</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                        <configuration>
-                            <file>${basedir}/lib/converter-${converter.version}.jar</file>
-                            <javadoc>${basedir}/lib/converter-${converter.version}-javadoc.jar</javadoc>
-                            <sources>${basedir}/lib/converter-${converter.version}-sources.jar</sources>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>utilities</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                        <configuration>
-                            <file>${basedir}/lib/Utilities-${utilities.version}.jar</file>
-                            <javadoc>${basedir}/lib/Utilities-${utilities.version}-javadoc.jar</javadoc>
-                            <sources>${basedir}/lib/Utilities-${utilities.version}-sources.jar</sources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 </project>
