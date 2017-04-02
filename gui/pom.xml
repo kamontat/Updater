@@ -15,8 +15,13 @@
     <dependencies>
         <dependency>
             <groupId>com.kamontat</groupId>
-            <artifactId>UpdateAPI</artifactId>
+            <artifactId>jUpdate</artifactId>
             <version>0.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kamontat</groupId>
+            <artifactId>UpdateAPI</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 </project>
