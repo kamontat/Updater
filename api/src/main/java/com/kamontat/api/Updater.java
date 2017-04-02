@@ -12,33 +12,30 @@ import com.kamontat.rawapi.Version;
  */
 public abstract class Updater implements Updatable {
 	// project version (include both current and remote)
-	protected Version version;
+	private Version version;
 	// project owner
 	protected Owner owner;
-	protected String title;
-	protected String description;
-	protected Downloadable download;
+	private String title;
+	private String description;
+	private Downloadable download;
 	
 	public Updater(Owner owner) {
 		this.owner = owner;
 	}
 	
-	@Override
-	public void setVersion(Version version) {
+	protected void setVersion(Version version) {
 		this.version = version;
 	}
 	
-	public void setTitle(String title) {
+	protected void setTitle(String title) {
 		this.title = title;
 	}
 	
-	@Override
-	public void setDescription(String htmlDescription) {
+	protected void setDescription(String htmlDescription) {
 		this.description = htmlDescription;
 	}
 	
-	@Override
-	public void setDownload(Downloadable link) {
+	protected void setDownload(Downloadable link) {
 		download = link;
 	}
 	

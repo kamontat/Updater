@@ -13,19 +13,11 @@ import java.util.concurrent.Callable;
 public interface Updatable extends Callable<Updatable>, Serializable {
 	long serialVersionUID = 1L;
 	
-	void setVersion(Version version);
-	
 	Version getVersion();
-	
-	void setTitle(String title);
 	
 	String getTitle();
 	
-	void setDescription(String htmlDescription);
-	
 	String getDescription();
-	
-	void setDownload(Downloadable link);
 	
 	Downloadable getDownload();
 	
@@ -35,7 +27,8 @@ public interface Updatable extends Callable<Updatable>, Serializable {
 	}
 	
 	/**
-	 * For update information from server
+	 * For update information from server <br>
+	 * <b>NOT</b> for download file, The download file should stay at {@link Downloadable#download()} method
 	 *
 	 * @return {@link Updatable}
 	 * @throws UpdateException
