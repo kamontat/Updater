@@ -5,11 +5,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.kamontat.exception.UpdateException;
 import com.kamontat.rawapi.Github;
-import com.kamontat.utilities.URLsUtil;
+import com.kamontat.utilities.URLManager;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+
+import static com.kamontat.utilities.URLManager.HTTP_CONNECTION;
 
 /**
  * @author kamontat
@@ -34,7 +36,7 @@ public class GithubManagement implements Github {
 	 */
 	public GithubManagement(Owner o) throws UpdateException {
 		String link = GITHUB_API + REPOS_API + o.getName() + "/" + o.getProjectName() + "/" + LATEST_RELEASE_API;
-		url = URLsUtil.getUrl(link).getUrl();
+		url = URLManager.getUrl(link).getUrl();
 		if (url == null) throw new UpdateException(link, "error occurred");
 		updateRemain();
 	}
@@ -47,7 +49,7 @@ public class GithubManagement implements Github {
 	@Override
 	public synchronized Github updateRemain() throws UpdateException {
 		try {
-			remaining = Integer.parseInt(URLsUtil.getUrl(url).getHttpConnection().getHeaderField(RATE_REMAINING_HEADER));
+			remaining = Integer.parseInt(URLManager.getUrl(url).getConnection(HTTP_CONNECTION).getHeaderField(RATE_REMAINING_HEADER));
 		} catch (Exception e) {
 			throw new UpdateException(url, e);
 		}

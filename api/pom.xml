@@ -12,6 +12,8 @@
     <artifactId>UpdateAPI</artifactId>
     <version>1.0.0</version>
 
+
+
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -32,6 +34,11 @@
             <groupId>com.kamontat</groupId>
             <artifactId>Utilities</artifactId>
             <version>${utilities.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kamontat</groupId>
+            <artifactId>LinkManagement</artifactId>
+            <version>${linkmanagement.version}</version>
         </dependency>
     </dependencies>
 </project>

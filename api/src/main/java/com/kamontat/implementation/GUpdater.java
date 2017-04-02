@@ -11,7 +11,7 @@ import com.kamontat.objects.Release;
 import com.kamontat.rawapi.Github;
 import com.kamontat.rawapi.Updatable;
 import com.kamontat.utilities.FilesUtil;
-import com.kamontat.utilities.URLsUtil;
+import com.kamontat.utilities.URLManager;
 
 import java.net.URL;
 
@@ -43,23 +43,25 @@ public class GUpdater extends Updater {
 		else this.url = url;
 	}
 	
+	public Github getGithub() {
+		return manager;
+	}
+	
 	@Override
 	public Updatable call() throws UpdateException {
 		// updating
-		manager.updateRemain();
-		manager.updateRelease();
+		Release release = manager.updateRemain().updateRelease().getRelease();
 		// set remote version
-		factory.setRemoteVersion(manager.getRelease().type(Release.ReleaseTitle.TAG_NAME, String.class));
+		factory.setRemoteVersion(release.type(Release.ReleaseTitle.TAG_NAME, String.class));
 		// set all information in updater
-		super.title = manager.getRelease().type(Release.ReleaseTitle.NAME, String.class);
-		super.description = manager.getRelease().type(Release.ReleaseTitle.BODY, String.class);
-		super.version = factory;
+		setTitle(release.type(Release.ReleaseTitle.NAME, String.class));
+		setDescription(release.type(Release.ReleaseTitle.BODY, String.class));
+		setVersion(factory);
 		// link setup
 		if (pos != -1)
-			url = URLsUtil.getUrl(manager.getRelease().getAsset(pos).get(Assets.AssetTitle.BROWSER_DOWNLOAD_URL)).getUrl();
+			url = URLManager.getUrl(release.getAsset(pos).get(Assets.AssetTitle.BROWSER_DOWNLOAD_URL)).getUrl();
 		// download setup
-		DownloadFactory.setLocation(url, FilesUtil.getFileFromRoot().getAbsolutePath());
-		super.download = DownloadFactory.getInstance().getDownload();
+		setDownload(DownloadFactory.setLocation(url, FilesUtil.getFileFromRoot().getAbsolutePath()));
 		return this;
 	}
 }
