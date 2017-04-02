@@ -1,6 +1,7 @@
 package com.kamontat.examples;
 
 import com.kamontat.exception.UpdateException;
+import com.kamontat.factory.UpdaterFactory;
 import com.kamontat.implementation.GUpdater;
 import com.kamontat.objects.Owner;
 import com.kamontat.rawapi.Updatable;
@@ -13,17 +14,19 @@ import com.kamontat.rawapi.Updatable;
 public class TestImp {
 	public static void main(String[] args) throws UpdateException {
 		Updatable update = new GUpdater(new Owner("kamontat", "CheckIDNumber"), "v1.0.0", 1);
-		update.call();
+		UpdaterFactory factory = UpdaterFactory.setUpdater(update);
 		
-		System.out.println(update.getTitle());
-		System.out.println(update.getDescription());
-		System.out.println(update.getVersion().getCurrentVersion());
-		System.out.println(update.getVersion().getRemoteVersion());
-		System.out.println(update.isLatest());
-		if (!update.isLatest()) {
-			System.out.println(update.getDownload().getSize());
-			System.out.println(update.getDownload().getContentType());
-			System.out.println(update.getDownload().download());
+		factory.checkRelease();
+		
+		System.out.println(factory.getTitle());
+		System.out.println(factory.getDescription());
+		System.out.println("current: " + factory.getCurrentVersion());
+		System.out.println("remote: " + factory.getRemoteVersion());
+		if (!factory.isLatest()) {
+			System.out.println(factory.getDownloadFileName());
+			System.out.println(factory.getDownloadSize());
+			System.out.println(factory.getDownloadType());
+			// System.out.println(update.getDownload().download());
 		}
 	}
 }
