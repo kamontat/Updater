@@ -128,7 +128,6 @@ public class Release {
 		if (title == ReleaseTitle.BODY) {
 			try {
 				output = Converter.by(Converter.Type.MD2HTML).convert(output).toString();
-				output = "<html>".concat(output).concat("</html>");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
