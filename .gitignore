@@ -201,3 +201,4 @@ target/
 .cache-main
 .scala_dependencies
 .worksheet
+/CheckIDNumber.jar

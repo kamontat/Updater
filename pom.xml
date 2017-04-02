@@ -28,8 +28,9 @@
         <maven.install.version>2.5</maven.install.version>
         <maven.download.version>1.3.0</maven.download.version>
         <!-- my github repository -->
-        <converter.version>1.0.1</converter.version>
-        <utilities.version>1.1.0</utilities.version>
+        <converter.version>1.1.0</converter.version>
+        <utilities.version>1.2.0</utilities.version>
+        <linkmanagement.version>1.0.0</linkmanagement.version>
     </properties>
 
     <!-- build -->
@@ -166,6 +167,47 @@
                             <outputDirectory>${project.basedir}/lib</outputDirectory>
                         </configuration>
                     </execution>
+
+
+                    <execution>
+                        <id>linkmanage</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>
+                                https://github.com/kamontat/LinkManagement/raw/v${linkmanagement.version}/production/LinkManagement-${linkmanagement.version}.jar
+                            </url>
+                            <outputDirectory>${project.basedir}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>linkmanage-javadoc</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>
+                                https://github.com/kamontat/LinkManagement/raw/v${linkmanagement.version}/production/LinkManagement-${linkmanagement.version}-javadoc.jar
+                            </url>
+                            <outputDirectory>${project.basedir}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>linkmanage-sources</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>
+                                https://github.com/kamontat/LinkManagement/raw/v${linkmanagement.version}/production/LinkManagement-${linkmanagement.version}-sources.jar
+                            </url>
+                            <outputDirectory>${project.basedir}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
             <!-- installation -->
@@ -196,6 +238,20 @@
                             <file>${project.basedir}/lib/Utilities-${utilities.version}.jar</file>
                             <javadoc>${project.basedir}/lib/Utilities-${utilities.version}-javadoc.jar</javadoc>
                             <sources>${project.basedir}/lib/Utilities-${utilities.version}-sources.jar</sources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>linkmanage</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <file>${project.basedir}/lib/LinkManagement-${linkmanagement.version}.jar</file>
+                            <javadoc>${project.basedir}/lib/LinkManagement-${linkmanagement.version}-javadoc.jar
+                            </javadoc>
+                            <sources>${project.basedir}/lib/LinkManagement-${linkmanagement.version}-sources.jar
+                            </sources>
                         </configuration>
                     </execution>
                 </executions>
