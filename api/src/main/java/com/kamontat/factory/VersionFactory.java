@@ -35,7 +35,7 @@ public class VersionFactory implements Version {
 	
 	@Override
 	public String getCurrentVersion() {
-		return current;
+		return current == null ? DEFAULT_VERSION: current;
 	}
 	
 	@Override
