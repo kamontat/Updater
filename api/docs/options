@@ -1,0 +1,30 @@
+-classpath
+'/Users/kamontat/.m2/repository/org/apache/maven/maven-model/3.3.9/maven-model-3.3.9.jar:/Users/kamontat/.m2/repository/org/codehaus/plexus/plexus-utils/3.0.22/plexus-utils-3.0.22.jar:/Users/kamontat/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.8.0/jackson-annotations-2.8.0.jar:/Users/kamontat/.m2/repository/com/kamontat/converter/1.1.0/converter-1.1.0.jar:/Users/kamontat/.m2/repository/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar:/Users/kamontat/.m2/repository/com/kamontat/Utilities/1.2.0/Utilities-1.2.0.jar:/Users/kamontat/.m2/repository/com/overzealous/remark/1.1.0/remark-1.1.0.jar:/Users/kamontat/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.8.7/jackson-databind-2.8.7.jar:/Users/kamontat/.m2/repository/com/kamontat/LinkManagement/1.0.0/LinkManagement-1.0.0.jar:/Users/kamontat/.m2/repository/org/jsoup/jsoup/1.10.2/jsoup-1.10.2.jar:/Users/kamontat/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.8.7/jackson-core-2.8.7.jar'
+-encoding
+'UTF-8'
+-private
+-sourcepath
+'/Users/kamontat/Desktop/jUpdater/api/src/main/java:/Users/kamontat/Desktop/jUpdater/api/target/distro-javadoc-sources/jackson-databind-2.8.7-sources:/Users/kamontat/Desktop/jUpdater/api/target/distro-javadoc-sources/maven-model-3.3.9-sources:/Users/kamontat/Desktop/jUpdater/api/target/distro-javadoc-sources/converter-1.1.0-sources:/Users/kamontat/Desktop/jUpdater/api/target/distro-javadoc-sources/Utilities-1.2.0-sources:/Users/kamontat/Desktop/jUpdater/api/target/distro-javadoc-sources/LinkManagement-1.0.0-sources'
+-author
+-bottom
+'Copyright &#169; 2017. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/kamontat/Desktop/jUpdater/api/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'UpdateAPI 1.0.0 API'
+-link
+'http://docs.oracle.com/javase/8/docs/api'
+-link
+'https://kamontat.github.io/Utilities'
+-link
+'https://kamontat.github.io/Conversion'
+-linkoffline
+'http://docs.oracle.com/javase/8/docs/api' '/Users/kamontat/Desktop/jUpdater/api/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'UpdateAPI 1.0.0 API'
