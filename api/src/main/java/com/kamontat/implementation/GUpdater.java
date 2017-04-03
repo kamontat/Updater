@@ -61,7 +61,7 @@ public class GUpdater extends Updater {
 		if (pos != -1)
 			url = URLManager.getUrl(release.getAsset(pos).get(Assets.AssetTitle.BROWSER_DOWNLOAD_URL)).getUrl();
 		// download setup
-		setDownload(DownloadFactory.setLocation(url, FilesUtil.getFileFromRoot().getAbsolutePath()));
+		setDownload(DownloadFactory.createDownloadable(url, FilesUtil.getFileFromRoot().getAbsolutePath()));
 		return this;
 	}
 }
