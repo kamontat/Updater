@@ -26,7 +26,13 @@ public class TestImp {
 			System.out.println(factory.getDownloadFileName());
 			System.out.println(factory.getDownloadSize());
 			System.out.println(factory.getDownloadType());
-			// System.out.println(update.getDownload().download());
+			// System.out.println(factory.download(Downloadable.getDefaultAction(update.getDownload().getReader()))); // download with default
+			
+			// System.out.println(factory.download(null)); // download with no action
+			
+			// System.out.println(factory.download(() -> {
+			// 	   System.out.println("Loading: " + update.getDownload().getReader().getBytesRead() + "/" + update.getDownload().getReader().getTotalByte());
+			// }));
 		}
 	}
 }
