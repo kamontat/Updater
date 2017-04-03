@@ -1,7 +1,6 @@
 package com.kamontat.objects;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.kamontat.config.Configuration;
 import com.kamontat.convert.Converter;
 
 import java.io.BufferedReader;
@@ -114,13 +113,13 @@ public class Release {
 	 * @param className
 	 * 		class that want to cast (simple pass by String.class, Object.class, etc.)
 	 * @param <T>
-	 * 		T class to cast
+	 * 		T class to cast or {@code null} if no release or error occurred
 	 * @return object in form of class that pass in parameter, or try cast <code>empty string</code>("") to <code>className</code> parameter
 	 * @see Converter
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> T type(ReleaseTitle title, Class<T> className) {
-		if (isEmpty()) return className.cast(Configuration.NOT_FOUND_RELEASE_MESSAGE);
+		if (isEmpty()) return null;
 		
 		String output = node.get(title.name().toLowerCase(Locale.ENGLISH)).asText();
 		
@@ -132,7 +131,11 @@ public class Release {
 				e.printStackTrace();
 			}
 		}
-		return className.cast(output);
+		try {
+			return className.cast(output);
+		} catch (ClassCastException e) {
+			return null;
+		}
 	}
 	
 	/**
