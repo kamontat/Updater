@@ -40,7 +40,7 @@ public class VersionFactory implements Version {
 	
 	@Override
 	public String getRemoteVersion() {
-		return remote;
+		return remote == null ? DEFAULT_VERSION: remote;
 	}
 	
 	@Override
