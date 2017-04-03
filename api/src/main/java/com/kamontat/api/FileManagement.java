@@ -16,6 +16,8 @@ import java.nio.file.StandardCopyOption;
 import java.util.concurrent.Callable;
 
 /**
+ * File Util for Update project
+ *
  * @author kamontat
  * @version 1.0
  * @since Tue 21/Mar/2017 - 9:17 AM
@@ -36,7 +38,7 @@ public class FileManagement {
 	 * <b>Be careful</b> to use this
 	 */
 	public static void removeThis() {
-		FilesUtil.delFile(FilesUtil.getFileFromRoot().getAbsolutePath());
+		FilesUtil.delAllFile(FilesUtil.getFileFromRoot().getAbsolutePath());
 	}
 	
 	/**
