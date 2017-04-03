@@ -1,6 +1,6 @@
 package com.kamontat.config;
 
-import com.kamontat.objects.Release;
+import com.kamontat.api.Updater;
 
 import java.io.Serializable;
 
@@ -19,11 +19,7 @@ public class Configuration implements Serializable {
 	/**
 	 * use to sent the message back when latest release not found
 	 *
-	 * @see Release#type(Release.ReleaseTitle, Class)
+	 * @see Updater#getTitle()
 	 */
 	public static String NOT_FOUND_RELEASE_MESSAGE = "Latest Release: not found";
-	/**
-	 * auto checking update program when open the program
-	 */
-	public static boolean isAutoUpdate = false;
 }
