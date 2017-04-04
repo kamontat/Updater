@@ -50,7 +50,7 @@
                         <!-- external library -->
                         <link>http://docs.oracle.com/javase/8/docs/api/</link>
                         <link>https://kamontat.github.io/Utilities/</link>
-                        <link>https://kamontat.github.io/Conversion/</link>
+                        <link>https://kamontat.github.io/Converter/</link>
                         <!--<link>https://kamontat.github.io/Utilities/</link>-->
                     </links>
                 </configuration>

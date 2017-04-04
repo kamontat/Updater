@@ -2,6 +2,7 @@ package com.kamontat.objects;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.kamontat.constants.SizeUnitType;
+import com.kamontat.exception.UpdateException;
 import com.kamontat.utilities.SizeUtil;
 
 import java.util.*;
@@ -33,6 +34,8 @@ public class Assets {
 	
 	/**
 	 * use this method if not asset
+	 *
+	 * @return empty asset
 	 */
 	static Assets getEmptyAsset() {
 		System.err.println("empty asset");
@@ -57,6 +60,7 @@ public class Assets {
 	 * @return data String in title, or empty string("") if no asset occurred
 	 */
 	public String get(AssetTitle title) {
+		if (node == null) throw new UpdateException(UpdateException.nullURL, "No asset possible");
 		String output = node.get(title.name().toLowerCase(Locale.ENGLISH)).asText();
 		if (title == AssetTitle.SIZE) output = SizeUtil.toMinimumByte(Long.parseLong(output), SizeUnitType.NON_SI);
 		return output;

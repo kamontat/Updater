@@ -53,6 +53,8 @@ public class UpdaterFactory {
 	/**
 	 * download file to setting location {@link DownloadFactory#createDownloadable(URL, String)}
 	 *
+	 * @param action
+	 * 		action code will do while loading, time by time
 	 * @return location/path that actually place
 	 * @throws UpdateException
 	 * 		Error occurred when checking
