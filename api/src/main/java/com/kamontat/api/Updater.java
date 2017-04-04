@@ -1,6 +1,9 @@
 package com.kamontat.api;
 
+import com.kamontat.annotation.NotNull;
+import com.kamontat.annotation.Nullable;
 import com.kamontat.config.Configuration;
+import com.kamontat.exception.UpdateException;
 import com.kamontat.objects.Owner;
 import com.kamontat.rawapi.Downloadable;
 import com.kamontat.rawapi.Updatable;
@@ -30,14 +33,16 @@ public abstract class Updater implements Updatable {
 	 * title of release <br>
 	 * Example: <i>Fixed important security bug</i>
 	 */
+	@Nullable
 	private String title;
 	/**
 	 * description of release <br>
 	 * should be <b>html</b> or <b>markdown</b>
 	 */
+	@Nullable
 	private String description;
 	/**
-	 * download manager (include type, size, link and download action) {@link Downloadable}
+	 * download manager (include get, size, link and download action) {@link Downloadable}
 	 */
 	private Downloadable download;
 	
@@ -69,7 +74,7 @@ public abstract class Updater implements Updatable {
 	 * @param link
 	 * 		{@link Downloadable} or {@link com.kamontat.factory.DownloadFactory#download}
 	 */
-	protected void setDownload(Downloadable link) {
+	protected void setDownload(@NotNull Downloadable link) {
 		download = link;
 	}
 	
@@ -92,6 +97,7 @@ public abstract class Updater implements Updatable {
 	
 	@Override
 	public Downloadable getDownload() {
+		if (download == null) throw new UpdateException(UpdateException.nullURL, "No download file");
 		return download;
 	}
 	

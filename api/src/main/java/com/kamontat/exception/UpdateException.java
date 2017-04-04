@@ -3,7 +3,6 @@ package com.kamontat.exception;
 import com.kamontat.annotation.NotNull;
 import com.kamontat.annotation.Nullable;
 
-import java.io.IOException;
 import java.net.URL;
 
 /**
@@ -18,9 +17,11 @@ import java.net.URL;
  * @version 1.0
  * @since Wed 08/Mar/2017 - 10:22 PM
  */
-public class UpdateException extends IOException {
+public class UpdateException extends RuntimeException {
 	private static final String DEFAULT_LINK = "Don't have any link setting yet.";
 	private static final String DEFAULT_MESSAGE = "Some error occurred.";
+	
+	public static final URL nullURL = null;
 	
 	public UpdateException(@Nullable URL url, @Nullable String message) {
 		this(url == null ? DEFAULT_LINK: url.toString(), message, null);

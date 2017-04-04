@@ -7,6 +7,9 @@ import com.kamontat.utilities.URLReader;
 import java.util.concurrent.Callable;
 
 /**
+ * get more information or download file <br>
+ * Implemented at {@link com.kamontat.factory.DownloadFactory}
+ *
  * @author kamontat
  * @version 1.0
  * @since Mon 20/Mar/2017 - 10:38 PM
@@ -40,9 +43,9 @@ public interface Downloadable extends Callable<String> {
 	long getSize();
 	
 	/**
-	 * get type of download file (learn more at {@link com.kamontat.constance.ContentType})
+	 * get get of download file (learn more at {@link com.kamontat.constance.ContentType})
 	 *
-	 * @return type in String format
+	 * @return get in String format
 	 */
 	String getContentType();
 	
@@ -67,6 +70,13 @@ public interface Downloadable extends Callable<String> {
 		return download(getDefaultAction(getReader()));
 	}
 	
+	/**
+	 * just print reader byte, can use in {@link Downloadable#download(Runnable)} method
+	 *
+	 * @param r
+	 * 		reader {@link URLReader}
+	 * @return runnable
+	 */
 	static Runnable getDefaultAction(URLReader r) {
 		return () -> System.out.println(r.getBytesRead());
 	}

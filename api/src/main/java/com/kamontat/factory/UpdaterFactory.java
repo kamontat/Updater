@@ -19,6 +19,13 @@ import java.net.URL;
 public class UpdaterFactory {
 	private static Updatable ourInstance;
 	
+	/**
+	 * set new factory
+	 *
+	 * @param update
+	 * 		init {@link Updatable}
+	 * @return factory
+	 */
 	public static UpdaterFactory setUpdater(Updatable update) {
 		if (ourInstance == null) {
 			if (update == null) {
@@ -89,6 +96,11 @@ public class UpdaterFactory {
 		return ourInstance.getDownload().getSize();
 	}
 	
+	/**
+	 * get content get of file that downloaded
+	 *
+	 * @return content-get
+	 */
 	public String getDownloadType() {
 		return ourInstance.getDownload().getContentType();
 	}
@@ -109,6 +121,11 @@ public class UpdaterFactory {
 		return ourInstance.getDownload().getReader();
 	}
 	
+	/**
+	 * <b>dangerous method</b>
+	 * <br>
+	 * This might cause all file is gone, so use when you sure that new file downloaded.
+	 */
 	public void delete() {
 		ourInstance.delete();
 	}

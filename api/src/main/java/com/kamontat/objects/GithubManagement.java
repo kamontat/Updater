@@ -10,6 +10,7 @@ import com.kamontat.utilities.URLManager;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.*;
 
 import static com.kamontat.utilities.URLManager.HTTP_CONNECTION;
 
@@ -19,10 +20,15 @@ import static com.kamontat.utilities.URLManager.HTTP_CONNECTION;
  * @since Mon 13/Mar/2017 - 9:11 PM
  */
 public class GithubManagement implements Github {
+	/**
+	 * For pass url {@code json} to {@link Map}
+	 */
 	private static final ObjectMapper mapper = new ObjectMapper();
-	
+	/**
+	 * latest release link
+	 */
 	private URL url;
-	private int remaining = -99;
+	private int remaining = DEFAULT_REMAINING;
 	private Release release;
 	
 	/**
@@ -39,11 +45,6 @@ public class GithubManagement implements Github {
 		url = URLManager.getUrl(link).getUrl();
 		if (url == null) throw new UpdateException(link, "error occurred");
 		updateRemain();
-	}
-	
-	@Override
-	public boolean isUpdated() {
-		return remaining != -99 && url != null && release != null;
 	}
 	
 	@Override

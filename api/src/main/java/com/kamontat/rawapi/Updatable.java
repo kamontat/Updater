@@ -39,8 +39,8 @@ public interface Updatable extends Callable<Updatable>, Serializable {
 	}
 	
 	/**
-	 * For update information from server <br>
-	 * <b>NOT</b> for download file, The download file should stay at {@link Downloadable#download()} method
+	 * For update information from server, <b>NOT</b> for download file. <br>
+	 * The download file should stay at {@link Downloadable#download(Runnable)} method when runnable is <b>optional</b> code that will run while loading progress
 	 *
 	 * @return {@link Updatable}
 	 * @throws UpdateException

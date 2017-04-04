@@ -3,14 +3,14 @@ package com.kamontat.objects;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.kamontat.convert.Converter;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.*;
+
+import static com.kamontat.objects.Release.ReleaseTitle.BODY;
 
 /**
  * Latest Release <br>
  * Usage: <br>
- * &emsp; getting data inside that release by {@link #type(ReleaseTitle, Class)} <br>
+ * &emsp; getting data inside that release by {@link #get(ReleaseTitle, Class)} <br>
  * &emsp; also getting asset inside that release by {@link #getAsset(int)}
  */
 public class Release {
@@ -38,7 +38,7 @@ public class Release {
 		/**
 		 * you can assume this to description, <b>HTML Format</b>
 		 */
-		BODY;
+		BODY
 	}
 	
 	/**
@@ -66,42 +66,12 @@ public class Release {
 	}
 	
 	/**
-	 * change text to json in form of "{ "text": "xxx" }"
-	 *
-	 * @param text
-	 * 		some text
-	 * @return String in form of json
-	 */
-	private String toJSON(String text) {
-		return "{ \n\"text\": \"" + text.replaceAll("(\\r|\\n|\\r\\n)+", "\\\\n") + "\"\n}";
-	}
-	
-	/**
 	 * check is release empty or not.
 	 *
 	 * @return true if empty release.
 	 */
 	public boolean isEmpty() {
 		return node == null;
-	}
-	
-	/**
-	 * convert {@link BufferedReader} to {@link String}
-	 *
-	 * @param reader
-	 * 		buffer to converting
-	 * @return String that content in buffer
-	 */
-	private String toString(BufferedReader reader) {
-		StringBuilder sb = new StringBuilder();
-		String line;
-		try {
-			while ((line = reader.readLine()) != null) {
-				sb.append(line).append("\n");
-			}
-		} catch (IOException ignore) {
-		}
-		return sb.toString();
 	}
 	
 	/**
@@ -117,14 +87,13 @@ public class Release {
 	 * @return object in form of class that pass in parameter, or try cast <code>empty string</code>("") to <code>className</code> parameter
 	 * @see Converter
 	 */
-	@SuppressWarnings("unchecked")
-	public <T> T type(ReleaseTitle title, Class<T> className) {
+	public <T> T get(ReleaseTitle title, Class<T> className) {
 		if (isEmpty()) return null;
 		
 		String output = node.get(title.name().toLowerCase(Locale.ENGLISH)).asText();
 		
 		// if body must convert markdown syntax to html syntax
-		if (title == ReleaseTitle.BODY) {
+		if (title == BODY) {
 			try {
 				output = Converter.by(Converter.Type.MD2HTML).convert(output).toString();
 			} catch (Exception e) {
