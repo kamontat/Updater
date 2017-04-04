@@ -21,7 +21,7 @@
 -link
 'https://kamontat.github.io/Utilities'
 -link
-'https://kamontat.github.io/Conversion'
+'https://kamontat.github.io/Converter'
 -linkoffline
 'http://docs.oracle.com/javase/8/docs/api' '/Users/kamontat/Desktop/jUpdater/api/target/javadoc-bundle-options'
 -use
