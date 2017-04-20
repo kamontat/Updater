@@ -1,7 +1,8 @@
 # jUpdater
 
-# On Maintaination
+# On Maintain
 - convert all `swing` to `javafx`
+- implement object in api with `Serialization`
 
 # To Contribute
 1. run `mvn clean`
