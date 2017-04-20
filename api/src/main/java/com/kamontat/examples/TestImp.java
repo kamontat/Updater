@@ -13,7 +13,9 @@ import com.kamontat.rawapi.Updatable;
  */
 public class TestImp {
 	public static void main(String[] args) throws UpdateException {
-		Updatable update = new GUpdater(new Owner("kamontat", "CheckIDNumber"), "v1.0.0", 1);
+		Owner owner = new Owner("kamontat", "CheckIDNumber");
+		Updatable update = new GUpdater(owner, "v1.0.0", 1);
+		
 		UpdaterFactory factory = UpdaterFactory.setUpdater(update);
 		
 		factory.checkRelease();
@@ -26,10 +28,14 @@ public class TestImp {
 			System.out.println(factory.getDownloadFileName());
 			System.out.println(factory.getDownloadSize());
 			System.out.println(factory.getDownloadType());
-			// System.out.println(factory.download(Downloadable.getDefaultAction(update.getDownload().getReader()))); // download with default
 			
-			// System.out.println(factory.download(null)); // download with no action
+			/* download with default */
+			// System.out.println(factory.download(Downloadable.getDefaultAction(update.getDownload().getReader())));
 			
+			/* download with no action */
+			// System.out.println(factory.download(null));
+			
+			/* download with custom action */
 			// System.out.println(factory.download(() -> {
 			// 	   System.out.println("Loading: " + update.getDownload().getReader().getBytesRead() + "/" + update.getDownload().getReader().getTotalByte());
 			// }));
