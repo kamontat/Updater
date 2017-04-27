@@ -20,7 +20,7 @@ import java.util.*;
 public class ReleasePopup extends AbstractAction implements Runnable {
 	private static JDialog dialog;
 	private Point point;
-	protected UpdaterFactory update;
+	private UpdaterFactory update;
 	
 	/**
 	 * Constructor to create popup <br>
