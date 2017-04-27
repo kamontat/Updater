@@ -1,12 +1,12 @@
 package com.kamontat;
 
+import com.kamontat.component.DetailPanel;
 import com.kamontat.exception.UpdateException;
 import com.kamontat.factory.UpdaterFactory;
 import com.kamontat.rawapi.Updatable;
 import com.kamontat.utilities.DesktopUtil;
 
 import javax.swing.*;
-import javax.swing.event.HyperlinkEvent;
 import javax.swing.text.Element;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -49,37 +49,25 @@ public class ReleasePopup extends AbstractAction implements Runnable {
 	 * @param update
 	 * 		The updater
 	 */
-	public ReleasePopup(Updatable update) {
-		this.update = UpdaterFactory.setUpdater(update);
+	public ReleasePopup(Updatable update) throws UpdateException {
+		this(UpdaterFactory.setUpdater(update));
 	}
 	
-	public ReleasePopup(UpdaterFactory update) {
+	public ReleasePopup(UpdaterFactory update) throws UpdateException {
 		this.update = update;
+		update.checkRelease();
 	}
 	
 	private JPanel setPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
 		// north
-		panel.add(new JLabel(String.format("version: %s -> %s", update.getCurrentVersion(), update.getRemoteVersion()), SwingConstants.CENTER), BorderLayout.NORTH);
+		JPanel p = new JPanel(new BorderLayout());
+		p.add(new JLabel(String.format("current: %-6s", update.getCurrentVersion()), SwingConstants.CENTER), BorderLayout.NORTH);
+		p.add(new JLabel(String.format("newest : %-6s", update.getRemoteVersion()), SwingConstants.CENTER), BorderLayout.SOUTH);
+		
+		panel.add(p, BorderLayout.NORTH);
 		// center
-		JEditorPane label = new JEditorPane("text/html", update.getDescription());
-		label.setEditable(false);
-		label.setOpaque(false);
-		label.addHyperlinkListener(e -> {
-			// hold
-			if (e.getEventType().equals(HyperlinkEvent.EventType.ENTERED)) {
-				placeholder(e.getInputEvent(), e.getSourceElement(), e.getURL(), e.getDescription());
-				// out hold
-			} else if (e.getEventType().equals(HyperlinkEvent.EventType.EXITED)) {
-				exitPlaceholder(e.getInputEvent(), e.getSourceElement(), e.getURL(), e.getDescription());
-				// click
-			} else if (e.getEventType().equals(HyperlinkEvent.EventType.ACTIVATED)) {
-				click(e.getInputEvent(), e.getSourceElement(), e.getURL(), e.getDescription());
-			} else {
-				otherEvent(e.getInputEvent(), e.getSourceElement(), e.getURL(), e.getDescription());
-			}
-		});
-		panel.add(label, BorderLayout.CENTER);
+		panel.add(new DetailPanel(update.getDescription(), DetailPanel.TextType.HTML).init(), BorderLayout.CENTER);
 		// south
 		JButton button = new JButton("update!");
 		button.addActionListener(this);
@@ -104,77 +92,6 @@ public class ReleasePopup extends AbstractAction implements Runnable {
 		}
 		done();
 		JOptionPane.showMessageDialog(null, s, "Message!", JOptionPane.PLAIN_MESSAGE);
-	}
-	
-	protected void setTooltip(InputEvent event, String text) {
-		JEditorPane.class.cast(event.getComponent()).setToolTipText(text);
-	}
-	
-	protected void removeTooltip(InputEvent event) {
-		JEditorPane.class.cast(event.getComponent()).setToolTipText(null);
-	}
-	
-	/**
-	 * Need to implement
-	 *
-	 * @param event
-	 * 		input event
-	 * @param element
-	 * 		element
-	 * @param link
-	 * 		url link
-	 * @param description
-	 * 		description or link
-	 */
-	private void click(InputEvent event, Element element, URL link, String description) {
-		DesktopUtil.get().browse(link);
-	}
-	
-	/**
-	 * Need to implement
-	 *
-	 * @param event
-	 * 		input event
-	 * @param element
-	 * 		element
-	 * @param link
-	 * 		url link
-	 * @param description
-	 * 		description or link
-	 */
-	protected void placeholder(InputEvent event, Element element, URL link, String description) {
-		setTooltip(event, description);
-	}
-	
-	/**
-	 * Need to implement
-	 *
-	 * @param event
-	 * 		input event
-	 * @param element
-	 * 		element
-	 * @param link
-	 * 		url link
-	 * @param description
-	 * 		description or link
-	 */
-	protected void exitPlaceholder(InputEvent event, Element element, URL link, String description) {
-		removeTooltip(event);
-	}
-	
-	/**
-	 * need to implement
-	 *
-	 * @param inputEvent
-	 * 		input event
-	 * @param sourceElement
-	 * 		element
-	 * @param url
-	 * 		url link
-	 * @param description
-	 * 		description or link
-	 */
-	protected void otherEvent(InputEvent inputEvent, Element sourceElement, URL url, String description) {
 	}
 	
 	private void waited() {
