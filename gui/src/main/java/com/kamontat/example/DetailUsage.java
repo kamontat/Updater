@@ -14,22 +14,10 @@ import com.kamontat.rawapi.Updatable;
  */
 public class DetailUsage {
 	public static void main(String[] args) throws UpdateException {
-		//		DetailPanel p = new DetailPanel(DetailPanel.TextType.HTML, "What **I** can *do* `this`?");
-		//		JFrame f = new JFrame("Test page");
-		//		f.setContentPane(JxAndSw.toSwing(p.initScene()));
-		//		f.pack();
-		//		f.setVisible(true);
-		//		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		
 		Owner owner = new Owner("kamontat", "CheckIDNumber");
-		Updatable update = new GUpdater(owner, "v1.0.0", 1);
+		Updatable update = new GUpdater(owner, "v3.0", 1);
 		
-		UpdaterFactory factory = UpdaterFactory.setUpdater(update);
-		
-		factory.checkRelease();
-		
-		ReleasePopup p = new ReleasePopup(factory);
-		
+		ReleasePopup p = new ReleasePopup(update);
 		p.run();
 	}
 }
