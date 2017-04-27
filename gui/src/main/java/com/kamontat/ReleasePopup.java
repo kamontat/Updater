@@ -14,7 +14,7 @@ import java.util.*;
  * The popup that contains update description and downloader link.
  *
  * @author kamontat
- * @version 1.0
+ * @version 2.0
  * @since Tue 14/Mar/2017 - 2:27 PM
  */
 public class ReleasePopup extends AbstractAction implements Runnable {
