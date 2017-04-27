@@ -1,112 +1,116 @@
 package com.kamontat.component;
 
-import com.kamontat.constance.ContentType;
-import com.kamontat.constance.Type;
 import com.kamontat.convert.Converter;
 import com.kamontat.exception.ConversionException;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
-import javafx.stage.Stage;
+import com.kamontat.utilities.DesktopUtil;
 
-import java.util.*;
-
-import static com.kamontat.component.DetailPanel.TextType.H;
-import static com.kamontat.component.DetailPanel.TextType.HTML;
+import javax.swing.*;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.text.Element;
+import java.awt.*;
+import java.awt.event.InputEvent;
+import java.net.URL;
 
 /**
  * @author kamontat
  * @version 1.0
  * @since Sun 26/Mar/2017 - 6:07 PM
  */
-public class DetailPanel extends Application {
-	private static final int SIZE = 2;
+public class DetailPanel extends JPanel {
 	private String htmlText;
 	
 	// accept type
-	enum TextType {
-		H,
+	public enum TextType {
 		HTML,
-		M,
-		MD,
 		MARKDOWN
 	}
 	
-	private void initApp() {
-		if (checkParamSize()) {
-			TextType t;
-			if ((t = getType()) != null) {
-				if (t == H || t == HTML) htmlText = getString();
-				else try {
-					htmlText = Converter.by(Converter.Type.MD2HTML).convert(getString()).toString();
-				} catch (ConversionException e) {
-					throwException(new IllegalArgumentException(e));
-				}
+	public DetailPanel(String text, TextType type) {
+		try {
+			if (type == TextType.MARKDOWN)
+				this.htmlText = Converter.by(Converter.Type.MD2HTML).convert(text).toString();
+			else this.htmlText = text;
+		} catch (ConversionException e) {
+			e.printStackTrace();
+			this.htmlText = "";
+		}
+	}
+	
+	public JPanel init() {
+		JEditorPane label = new JEditorPane("text/html", htmlText);
+		label.setEditable(false);
+		label.setOpaque(false);
+		label.addHyperlinkListener(e -> {
+			// hold
+			if (e.getEventType().equals(HyperlinkEvent.EventType.ENTERED)) {
+				placeholder(e.getInputEvent(), e.getSourceElement(), e.getURL(), e.getDescription());
+				// out hold
+			} else if (e.getEventType().equals(HyperlinkEvent.EventType.EXITED)) {
+				exitPlaceholder(e.getInputEvent(), e.getSourceElement(), e.getURL(), e.getDescription());
+				// click
+			} else if (e.getEventType().equals(HyperlinkEvent.EventType.ACTIVATED)) {
+				click(e.getInputEvent(), e.getSourceElement(), e.getURL(), e.getDescription());
 			} else {
-				throwException(new IllegalArgumentException("Invalid input type"));
+				// otherEvent(e.getInputEvent(), e.getSourceElement(), e.getURL(), e.getDescription());
 			}
-		} else {
-			throwException(new IllegalArgumentException("Invalid input size"));
-		}
+		});
+		add(label, BorderLayout.CENTER);
+		return this;
 	}
 	
-	private Scene initScene() {
-		
-		
-		// showing readme
-		WebView v = new WebView();
-		WebEngine engine = v.getEngine();
-		engine.loadContent(htmlText, ContentType.get(Type.TEXT, ContentType.HTML));
-		
-		StackPane pane = new StackPane(v);
-		return new Scene(pane);
+	/**
+	 * Need to implement
+	 *
+	 * @param event
+	 * 		input event
+	 * @param element
+	 * 		element
+	 * @param link
+	 * 		url link
+	 * @param description
+	 * 		description or link
+	 */
+	private void click(InputEvent event, Element element, URL link, String description) {
+		DesktopUtil.get().browse(link);
 	}
 	
-	@Override
-	public void init() throws Exception {
-		initApp();
-		super.init();
+	/**
+	 * Need to implement
+	 *
+	 * @param event
+	 * 		input event
+	 * @param element
+	 * 		element
+	 * @param link
+	 * 		url link
+	 * @param description
+	 * 		description or link
+	 */
+	private void placeholder(InputEvent event, Element element, URL link, String description) {
+		setTooltip(event, description);
 	}
 	
-	private String getParam(int index) {
-		return getParameters().getUnnamed().get(index);
+	/**
+	 * Need to implement
+	 *
+	 * @param event
+	 * 		input event
+	 * @param element
+	 * 		element
+	 * @param link
+	 * 		url link
+	 * @param description
+	 * 		description or link
+	 */
+	private void exitPlaceholder(InputEvent event, Element element, URL link, String description) {
+		removeTooltip(event);
 	}
 	
-	private boolean checkParamSize() {
-		return getParameters().getUnnamed().size() == SIZE;
+	private void setTooltip(InputEvent event, String text) {
+		JEditorPane.class.cast(event.getComponent()).setToolTipText(text);
 	}
 	
-	private TextType getType() {
-		for (TextType t : TextType.values()) {
-			if (getParam(0).toLowerCase(Locale.ENGLISH).contains(t.name().toLowerCase(Locale.ENGLISH))) return t;
-		}
-		return null;
-	}
-	
-	private String getString() {
-		return getParam(1);
-	}
-	
-	private void throwException(RuntimeException e) {
-		throw e != null ? e: new RuntimeException("Error Occurred");
-	}
-	
-	
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setScene(initScene());
-		primaryStage.show();
-	}
-	
-	public static Scene setHtml(String htmlText) {
-		DetailPanel p = new DetailPanel();
-		p.htmlText = htmlText;
-		return p.initScene();
-	}
-	
-	public static void main(String[] args) {
-		DetailPanel.launch();
+	private void removeTooltip(InputEvent event) {
+		JEditorPane.class.cast(event.getComponent()).setToolTipText(null);
 	}
 }
