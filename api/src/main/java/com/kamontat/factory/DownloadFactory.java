@@ -29,20 +29,23 @@ public class DownloadFactory {
 	 *
 	 * @param link
 	 * 		download file link
-	 * @param read
-	 * 		reader (contains loading data)
+	 * @param file
+	 * 		file of result wit read data finish
 	 */
-	private DownloadFactory(URL link, URLReader read) {
+	private DownloadFactory(URL link, File file) {
 		download = new Downloadable() {
+			private URLReader reader;
+			
 			@Override
 			public URLReader getReader() {
-				return read;
+				return reader;
 			}
 			
 			@Override
-			public String download(@Nullable Runnable action) throws UpdateException {
+			public String download(@Nullable Runnable action) throws UpdateException, IOException {
+				reader = new URLReader(link, file);
 				try {
-					return createAction(read, action).call();
+					return createAction(reader, action).call();
 				} catch (Exception e) {
 					throw new UpdateException(link, e);
 				}
@@ -50,7 +53,7 @@ public class DownloadFactory {
 			
 			@Override
 			public long getSize() {
-				return read.getTotalByte();
+				return reader.getTotalByte();
 			}
 			
 			@Override
@@ -76,13 +79,8 @@ public class DownloadFactory {
 	 * @return {@link Downloadable}
 	 */
 	public static Downloadable createDownloadable(URL link, String distDirectory) {
-		try {
-			URLReader read = new URLReader(link, new File(distDirectory));
-			return new DownloadFactory(link, read).download;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
+		File f = new File(distDirectory);
+		return new DownloadFactory(link, f).download;
 	}
 	
 	/**

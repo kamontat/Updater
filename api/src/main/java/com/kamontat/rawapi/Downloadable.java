@@ -4,6 +4,7 @@ import com.kamontat.annotation.Nullable;
 import com.kamontat.exception.UpdateException;
 import com.kamontat.utilities.URLReader;
 
+import java.io.IOException;
 import java.util.concurrent.Callable;
 
 /**
@@ -16,10 +17,11 @@ import java.util.concurrent.Callable;
  */
 public interface Downloadable extends Callable<String> {
 	/**
-	 * get reader
+	 * get reader, you can get only the {@link #download(Runnable)} is called
 	 *
-	 * @return {@link URLReader} for reading data
+	 * @return {@link URLReader} for reading data, or null if error occurred
 	 */
+	@Nullable
 	URLReader getReader();
 	
 	/**
@@ -33,7 +35,7 @@ public interface Downloadable extends Callable<String> {
 	 * @throws UpdateException
 	 * 		Error occurred when try to download
 	 */
-	String download(@Nullable Runnable action) throws UpdateException;
+	String download(@Nullable Runnable action) throws UpdateException, IOException;
 	
 	/**
 	 * get download size

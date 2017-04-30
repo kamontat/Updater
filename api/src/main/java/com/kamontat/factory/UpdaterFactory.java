@@ -6,6 +6,7 @@ import com.kamontat.exception.UpdateException;
 import com.kamontat.rawapi.Updatable;
 import com.kamontat.utilities.URLReader;
 
+import java.io.IOException;
 import java.net.URL;
 
 /**
@@ -60,7 +61,7 @@ public class UpdaterFactory {
 	 * 		Error occurred when checking
 	 */
 	@LongMethod
-	public String download(@Nullable Runnable action) throws UpdateException {
+	public String download(@Nullable Runnable action) throws UpdateException, IOException {
 		return ourInstance.getDownload().download(action);
 	}
 	
