@@ -3,6 +3,7 @@
 ### Example user template
 
 # IntelliJ project files
+!**/production/*.jar
 .idea
 *.iml
 out
