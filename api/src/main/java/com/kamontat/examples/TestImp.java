@@ -12,12 +12,16 @@ import com.kamontat.rawapi.Updatable;
  * @since Tue 21/Mar/2017 - 9:54 AM
  */
 public class TestImp {
+	public static void setFactory(Updatable updatable) {
+		UpdaterFactory.setUpdater(updatable);
+	}
+	
 	public static void main(String[] args) throws UpdateException {
 		Owner owner = new Owner("kamontat", "CheckIDNumber");
 		Updatable update = new GUpdater(owner, "v1.0.0", 1);
+		setFactory(update);
 		
-		UpdaterFactory factory = UpdaterFactory.setUpdater(update);
-		
+		UpdaterFactory factory = UpdaterFactory.getFactory();
 		factory.checkRelease();
 		
 		System.out.println(factory.getTitle());

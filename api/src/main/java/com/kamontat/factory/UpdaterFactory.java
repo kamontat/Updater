@@ -1,6 +1,7 @@
 package com.kamontat.factory;
 
 import com.kamontat.annotation.LongMethod;
+import com.kamontat.annotation.NotNull;
 import com.kamontat.annotation.Nullable;
 import com.kamontat.exception.UpdateException;
 import com.kamontat.rawapi.Updatable;
@@ -11,14 +12,17 @@ import java.net.URL;
 
 /**
  * Factory for {@link Updatable}, easy and to use but hard to manage <br>
- * This is <b>optional</b>, you might use directly
+ * This is <b>optional</b>, you might use directly <br>
+ * <p>
+ * Explanation: this class is singleton for sure, so you can install updatable class only once times. And next time to get update you can call method {@link #getFactory()} instead
  *
  * @author kamontat
- * @version 1.0
+ * @version 1.1
  * @since Tue 21/Mar/2017 - 9:21 AM
  */
 public class UpdaterFactory {
-	private static Updatable ourInstance;
+	private static UpdaterFactory factory;
+	private Updatable ourInstance;
 	
 	/**
 	 * set new factory
@@ -28,16 +32,22 @@ public class UpdaterFactory {
 	 * @return factory
 	 */
 	public static UpdaterFactory setUpdater(Updatable update) {
-		if (ourInstance == null) {
-			if (update == null) {
-				throw new NullPointerException("update can't be null");
-			}
-			UpdaterFactory.ourInstance = update;
+		if (factory == null) {
+			if (update == null) throw new NullPointerException("update can't be null");
+			factory = new UpdaterFactory(update);
 		}
-		return new UpdaterFactory();
+		return new UpdaterFactory(update);
 	}
 	
-	private UpdaterFactory() {
+	@Nullable
+	public static UpdaterFactory getFactory() {
+		return factory;
+	}
+	
+	private UpdaterFactory(@NotNull Updatable updatable) {
+		if (this.ourInstance == null) {
+			this.ourInstance = updatable;
+		}
 	}
 	
 	/**
