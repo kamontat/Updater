@@ -2,7 +2,6 @@ package com.kamontat.example;
 
 import com.kamontat.ReleasePopup;
 import com.kamontat.exception.UpdateException;
-import com.kamontat.factory.UpdaterFactory;
 import com.kamontat.implementation.GUpdater;
 import com.kamontat.objects.Owner;
 import com.kamontat.rawapi.Updatable;
