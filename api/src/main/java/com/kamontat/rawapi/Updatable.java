@@ -32,7 +32,7 @@ public interface Updatable extends Callable<Updatable>, Serializable {
 	
 	/**
 	 * <b>beware</b>: this method will delete all file in current folder/project <br>
-	 * Using from delete old version is enough
+	 * Use for delete old version application is enough.
 	 */
 	default void delete() {
 		FileManagement.removeThis();
