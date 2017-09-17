@@ -22,7 +22,7 @@ public interface Downloadable extends Callable<String> {
 	 * @return {@link URLReader} for reading data, or null if error occurred
 	 */
 	@Nullable
-	URLReader getReader();
+	URLReader getReader() throws UpdateException;
 	
 	/**
 	 * try to download something (this is long long method) <br>

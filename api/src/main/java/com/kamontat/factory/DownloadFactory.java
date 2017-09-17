@@ -37,15 +37,19 @@ public class DownloadFactory {
 			private URLReader reader;
 			
 			@Override
-			public URLReader getReader() {
+			public URLReader getReader() throws UpdateException {
+				if (reader == null) try {
+					reader = new URLReader(link, file);
+				} catch (IOException e) {
+					throw new UpdateException(link, e);
+				}
 				return reader;
 			}
 			
 			@Override
 			public String download(@Nullable Runnable action) throws UpdateException, IOException {
-				reader = new URLReader(link, file);
 				try {
-					return createAction(reader, action).call();
+					return createAction(getReader(), action).call();
 				} catch (Exception e) {
 					throw new UpdateException(link, e);
 				}
@@ -53,7 +57,12 @@ public class DownloadFactory {
 			
 			@Override
 			public long getSize() {
-				return reader.getTotalByte();
+				try {
+					return getReader().getTotalByte();
+				} catch (UpdateException e) {
+					e.printStackTrace();
+					return 0;
+				}
 			}
 			
 			@Override
@@ -95,6 +104,9 @@ public class DownloadFactory {
 	private static Callable<String> createAction(URLReader read, @Nullable Runnable run) {
 		return () -> {
 			read.setInput();
+			read.setOutput();
+			// optional: // TODO 9/17/2017 AD 16:34 implement with reader bg
+			// ReaderBackground background = new ReaderBackground(read);
 			while (read.read() != -1) {
 				if (run != null) run.run();
 			}
