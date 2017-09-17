@@ -33,14 +33,14 @@ public class UpdaterFactory {
 	 */
 	public static UpdaterFactory setUpdater(Updatable update) {
 		if (factory == null) {
-			if (update == null) throw new NullPointerException("update can't be null");
+			if (update == null) throw new NullPointerException("update can't be null.");
 			factory = new UpdaterFactory(update);
 		}
 		return new UpdaterFactory(update);
 	}
 	
-	@Nullable
 	public static UpdaterFactory getFactory() {
+		if (factory == null) throw new NullPointerException("you don't call setUpdater to initial factory.");
 		return factory;
 	}
 	
@@ -105,6 +105,11 @@ public class UpdaterFactory {
 		return ourInstance.getDownload().getName();
 	}
 	
+	/**
+	 * get download application size
+	 *
+	 * @return size in {@code byte}
+	 */
 	public long getDownloadSize() {
 		return ourInstance.getDownload().getSize();
 	}
