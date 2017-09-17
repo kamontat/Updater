@@ -1,10 +1,12 @@
 package com.kamontat.examples;
 
+import com.kamontat.constants.SizeUnit;
 import com.kamontat.exception.UpdateException;
 import com.kamontat.factory.UpdaterFactory;
 import com.kamontat.implementation.GUpdater;
 import com.kamontat.objects.Owner;
 import com.kamontat.rawapi.Updatable;
+import com.kamontat.utilities.SizeUtil;
 
 /**
  * @author kamontat
@@ -30,7 +32,12 @@ public class TestImp {
 		System.out.println("remote: " + factory.getRemoteVersion());
 		if (!factory.isLatest()) {
 			System.out.println(factory.getDownloadFileName());
-			System.out.println(factory.getDownloadSize());
+			
+			// decode size example
+			long size = factory.getDownloadSize();
+			double mb = SizeUtil.getSize(size, SizeUnit.B).convertTo(SizeUnit.MB).getSize().doubleValue();
+			System.out.printf("size: %.2f MB", mb);
+			
 			System.out.println(factory.getDownloadType());
 			
 			/* download with default */
