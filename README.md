@@ -3,6 +3,7 @@
 # On Maintain
 - convert all `swing` to `javafx`
 - implement object in api with `Serialization`
+- new download ways. using linkmanagement api (ReaderBackground)
 
 # To Contribute
 1. run `mvn clean`
