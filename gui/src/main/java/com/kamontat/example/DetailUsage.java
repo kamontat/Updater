@@ -14,7 +14,7 @@ import com.kamontat.rawapi.Updatable;
 public class DetailUsage {
 	public static void main(String[] args) throws UpdateException {
 		Owner owner = new Owner("kamontat", "CheckIDNumber");
-		Updatable update = new GUpdater(owner, "v3.0", 1);
+		Updatable update = new GUpdater(owner, "v2.0", 1);
 		
 		ReleasePopup p = new ReleasePopup(update);
 		p.run();

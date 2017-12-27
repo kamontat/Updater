@@ -17,36 +17,36 @@ import java.awt.event.ActionEvent;
  * @since Tue 14/Mar/2017 - 2:27 PM
  */
 public class ReleasePopup extends AbstractUI {
-	
-	public ReleasePopup(Updatable update) throws UpdateException {
-		super(update);
-	}
-	
-	public ReleasePopup(UpdaterFactory update) throws UpdateException {
-		super(update);
-	}
-	
-	/**
-	 * before starting loading
-	 */
-	public void preExecute() {
-		dialog.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-	}
-	
-	/**
-	 * after starting loading
-	 */
-	public void postExecute() {
-		dialog.setCursor(Cursor.getDefaultCursor());
-	}
-	
-	public void postExecute(Object obj) {
-		dialog.setCursor(Cursor.getDefaultCursor());
-		JOptionPane.showMessageDialog(super.window, obj.toString(), "Message!", JOptionPane.PLAIN_MESSAGE);
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-	
-	}
+    
+    public ReleasePopup(Updatable update) throws UpdateException {
+        super(update);
+    }
+    
+    public ReleasePopup(UpdaterFactory update) throws UpdateException {
+        super(update);
+    }
+    
+    /**
+     * before starting loading
+     */
+    public void preExecute() {
+        dialog.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+    }
+    
+    /**
+     * after starting loading
+     */
+    public void postExecute() {
+        dialog.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    public void postExecute(Object obj) {
+        dialog.setCursor(Cursor.getDefaultCursor());
+        JOptionPane.showMessageDialog(super.window, obj.toString(), "Message!", JOptionPane.PLAIN_MESSAGE);
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("Download");
+    }
 }
